@@ -1,7 +1,6 @@
 const assert = require('assert');
 const crypto = require('crypto');
 const storage = require('../storage');
-const fxa = require('../fxa');
 
 module.exports = {
   hmac: async function(req, res, next) {
@@ -59,18 +58,6 @@ module.exports = {
       }
     }
     if (req.authorized) {
-      next();
-    } else {
-      res.sendStatus(401);
-    }
-  },
-  fxa: async function(req, res, next) {
-    const authHeader = req.header('Authorization');
-    if (authHeader && /^Bearer\s/i.test(authHeader)) {
-      const token = authHeader.split(' ')[1];
-      req.user = await fxa.verify(token);
-    }
-    if (req.user) {
       next();
     } else {
       res.sendStatus(401);

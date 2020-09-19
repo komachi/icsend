@@ -6,9 +6,9 @@ class S3Storage {
     this.log = log;
     const cfg = {};
     if (config.s3_endpoint != '') {
-        cfg['endpoint'] = config.s3_endpoint;
+      cfg['endpoint'] = config.s3_endpoint;
     }
-    cfg['s3ForcePathStyle'] = config.s3_use_path_style_endpoint
+    cfg['s3ForcePathStyle'] = config.s3_use_path_style_endpoint;
     AWS.config.update(cfg);
     this.s3 = new AWS.S3();
   }
@@ -21,7 +21,9 @@ class S3Storage {
   }
 
   getStream(id) {
-    return this.s3.getObject({ Bucket: this.bucket, Key: id }).createReadStream();
+    return this.s3
+      .getObject({ Bucket: this.bucket, Key: id })
+      .createReadStream();
   }
 
   set(id, file) {

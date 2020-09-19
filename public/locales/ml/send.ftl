@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = ഫയർഫോക്സ് സെൻഡ്
+# icsend is a brand name and should not be localized.
+title = icsend
 siteFeedback = പ്രതികരണം
 importingFile = ഇറക്കുമതി ചെയ്യുന്നു...
 encryptingFile = എൻക്രിപ്റ്റ് ചെയ്യുന്നു...
@@ -48,9 +48,9 @@ passwordSetError = ഈ രഹസ്യവാക്ക് ക്രമീകര�
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = ഫയർഫോക്സ് സെൻഡ്
--send-short-brand = സെൻഡ്
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = ഫയർഫോക്സ്
 -mozilla = മോസില്ല
 introTitle = ലളിതവും സ്വകാര്യവുമായ ഫയൽ പങ്കിടൽ

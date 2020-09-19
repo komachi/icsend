@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = Ymportearje…
 encryptingFile = Fersiferje…
 decryptingFile = Untsiferje…
@@ -19,13 +19,13 @@ unlockButtonLabel = Deblokkearje
 downloadButtonLabel = Downloade
 downloadFinish = Download foltôge
 fileSizeProgress = ({ $partialSize } fan { $totalSize })
-sendYourFilesLink = Firefox Send probearje
+sendYourFilesLink = icsend probearje
 errorPageHeader = Der is wat misgien!
 fileTooBig = It bestân is te grut om op te laden. It moat lytser wêze as { $size }.
 linkExpiredAlt = Keppeling ferrûn
 notSupportedHeader = Jo browser wurdt net stipe.
 notSupportedLink = Wêrom wurdt myn browser net stipe?
-notSupportedOutdatedDetail = Spitigernôch stipet dizze ferzje fan Firefox de webtechnology dy't Firefox Send mooflik makket net. Jo moatte jo browser fernije.
+notSupportedOutdatedDetail = Spitigernôch stipet dizze ferzje fan Firefox de webtechnology dy't icsend mooflik makket net. Jo moatte jo browser fernije.
 updateFirefox = Firefox fernije
 deletePopupCancel = Annulearje
 deleteButtonHover = Fuortsmite
@@ -33,8 +33,8 @@ footerLinkLegal = Juridysk
 footerLinkPrivacy = Privacy
 footerLinkCookies = Cookies
 passwordTryAgain = Net krekt wachtwurd. Probearje it opnij.
-javascriptRequired = Firefox Send fereasket JavaScript.
-whyJavascript = Werom hat Firefox Send JavaScript nedich?
+javascriptRequired = icsend fereasket JavaScript.
+whyJavascript = Werom hat icsend JavaScript nedich?
 enableJavascript = Skeakelje JavaScript yn en probearje nochris.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }o { $minutes }m
@@ -47,9 +47,9 @@ passwordSetError = Dit wachtwurd koe net ynsteld wurde
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Ienfâldich, privee bestannen diele

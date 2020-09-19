@@ -127,7 +127,6 @@ describe('Storage', function() {
         pwd: 0,
         dl: 1,
         dlimit: 1,
-        fxa: 1,
         auth: 'foo',
         metadata: 'bar',
         nonce: 'baz',
@@ -142,7 +141,6 @@ describe('Storage', function() {
           dead: false,
           flagged: false,
           dlToken: 0,
-          fxa: true,
           pwd: false,
           storage: 'excluded'
         }

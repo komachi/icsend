@@ -10,18 +10,11 @@ import controller from './controller';
 import dragManager from './dragManager';
 import pasteManager from './pasteManager';
 import storage from './storage';
-import metrics from './metrics';
-import experiments from './experiments';
-import * as Sentry from '@sentry/browser';
 import './main.css';
 import User from './user';
 import { getTranslator } from './locale';
 import Archive from './archive';
 import { setTranslate, locale } from './utils';
-
-if (navigator.doNotTrack !== '1' && window.SENTRY_CONFIG) {
-  Sentry.init(window.SENTRY_CONFIG);
-}
 
 if (process.env.NODE_ENV === 'production') {
   nanotiming.disabled = true;
@@ -56,7 +49,6 @@ if (process.env.NODE_ENV === 'production') {
     capabilities,
     translate,
     storage,
-    sentry: Sentry,
     user: new User(storage, LIMITS, window.AUTH_CONFIG),
     transfer: null,
     fileInfo: null,
@@ -66,8 +58,6 @@ if (process.env.NODE_ENV === 'production') {
   const app = routes(choo({ hash: true }));
   // eslint-disable-next-line require-atomic-updates
   window.app = app;
-  app.use(experiments);
-  app.use(metrics);
   app.use(controller);
   app.use(dragManager);
   app.use(pasteManager);

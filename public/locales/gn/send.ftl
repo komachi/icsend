@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = Ojegueruhína…
 encryptingFile = Mo’ãmby…
 decryptingFile = Ñemo’ã’o…
@@ -19,13 +19,13 @@ unlockButtonLabel = Mbojera
 downloadButtonLabel = Mboguejy
 downloadFinish = Oguejypáma
 fileSizeProgress = ({ $partialSize } rehe { $totalSize })
-sendYourFilesLink = Eipuru Firefox Send
+sendYourFilesLink = Eipuru icsend
 errorPageHeader = ¡Oiko jejavy!
 fileTooBig = Marandurenda tuichaiterei ehupi hag̃ua. Michĩveva’erã { $size } gui.
 linkExpiredAlt = Juajuha ndoikóiva
 notSupportedHeader = Ne kundaha ndorekói pytyvõ.
 notSupportedLink = ¿Mba’ére che kundahára ndorekói ñepytyvõ?
-notSupportedOutdatedDetail = Ko Firefox rembiapo ndaipu’akái ñanduti rembipurupyahu oikotevẽva Firefox Send. Embohekopyahúke ne kundahára.
+notSupportedOutdatedDetail = Ko Firefox rembiapo ndaipu’akái ñanduti rembipurupyahu oikotevẽva icsend. Embohekopyahúke ne kundahára.
 updateFirefox = Firefox mbohekopyahu
 deletePopupCancel = Heja
 deleteButtonHover = Mboguete
@@ -33,8 +33,8 @@ footerLinkLegal = Añetegua
 footerLinkPrivacy = Ñemigua
 footerLinkCookies = Kookie
 passwordTryAgain = Ñe’ẽñemi ndoikóiva. Eha’ãjey.
-javascriptRequired = Firefox Send oikotevẽ JavaScript
-whyJavascript = ¿Mba’ére Firefox Send oikotevẽ JavaScript?
+javascriptRequired = icsend oikotevẽ JavaScript
+whyJavascript = ¿Mba’ére icsend oikotevẽ JavaScript?
 enableJavascript = Ikatúpa embojuruja JavaScript ha eha’ãjey uperire.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours } h { $minutes } m
@@ -47,9 +47,9 @@ passwordSetError = Ndaikatúi oikóvo ko ñe’ẽñemi
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Marandurenda ñemoambue hasy’ỹ ha ñemiguáva

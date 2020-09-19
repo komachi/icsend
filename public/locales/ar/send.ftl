@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = فَيَرفُكس سِنْد
+# icsend is a brand name and should not be localized.
+title = icsend
 siteFeedback = الانطباعات
 importingFile = يستورد…
 encryptingFile = يعمّي…
@@ -56,9 +56,9 @@ passwordSetError = يجب ألا تُضبط كلمة السر هذه
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = شارِك ملفاتك بلا عناء وبخصوصية تامة

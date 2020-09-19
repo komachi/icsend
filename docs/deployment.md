@@ -1,5 +1,5 @@
 ## Requirements
-This document describes how to do a full deployment of Firefox Send on your own Linux server. You will need:
+This document describes how to do a full deployment of icsend on your own Linux server. You will need:
 
 * A working (and ideally somewhat recent) installation of NodeJS and NPM
 * GIT
@@ -13,13 +13,13 @@ For Debian/Ubuntu systems this probably just means something like this:
 ## Building
 * We assume an already configured virtual-host on your webserver with an existing empty htdocs folder
 * First, remove that htdocs folder - we will replace it with Firefox Send's version now
-* git clone https://github.com/mozilla/send.git htdocs
+* git clone https://github.com/komachi/icsend.git htdocs
 * Make now sure you are NOT root but rather the user your webserver is serving files under (e.g. "su www-data" or whoever the owner of your htdocs folder is)
 * npm install
 * npm run build
 
 ## Running
-To have a permanently running version of Firefox Send as a background process:
+To have a permanently running version of icsend as a background process:
 
 * Create a file "run.sh" with:
 ```
@@ -29,11 +29,11 @@ nohup su www-data -c "npm run prod" 2>/dev/null &
 * chmod +x run.sh
 * ./run.sh
 
-Now the Firefox Send backend should be running on port 1443. You can check with:
+Now the icsend backend should be running on port 1443. You can check with:
 * telnet localhost 1443
 
 ## Reverse Proxy
-Of course, we don't want to expose the service on port 1443. Instead we want our normal webserver to forward all requests to Firefox send ("Reverse proxy").
+Of course, we don't want to expose the service on port 1443. Instead we want our normal webserver to forward all requests to icsend ("Reverse proxy").
 
 # Apache webserver
 
@@ -58,7 +58,7 @@ In your Apache virtual host configuration file, insert this:
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule .* - [L]
 
-    # If it's a websocket connection, redirect it to a Send WS connection
+    # If it's a websocket connection, redirect it to a icsend WS connection
     RewriteCond %{HTTP:Upgrade} =websocket [NC]
     RewriteRule /(.*) ws://127.0.0.1:1443/$1 [P,L]
 

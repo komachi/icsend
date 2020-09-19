@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = Hìaj a'nïn huan'ānj…
 encryptingFile = Nagi'iaj hùij…
 decryptingFile = Hìaj nâ'nïn…
@@ -19,13 +19,13 @@ unlockButtonLabel = Na'nïn riñanj
 downloadButtonLabel = Nadunïnj
 downloadFinish = Ngà nahui nanïnj
 fileSizeProgress = ({ $partialSize } guendâ { $totalSize })
-sendYourFilesLink = Garahuè dàj 'iaj sun Firefox Send
+sendYourFilesLink = Garahuè dàj 'iaj sun icsend
 errorPageHeader = Huā sa gahui a'nan'!
 fileTooBig = Ûta yachìj hua archibô dan. Da'ui gā li doj ga da' { $size }
 linkExpiredAlt = Nitāj si ni'ñānj lînk gà'
 notSupportedHeader = Nitāj si huā hue'ê riña sa nana'uî't.
 notSupportedLink = Nù huin saj nitāj si huā hue'ê riña sa nana'uí?
-notSupportedOutdatedDetail = Nu unùkuaj Firefox nan gi'iaj sunj ngà sa 'iaj sun ngà Firefox Send. Da'uît nāgi'iaj nakàt riña sa nana'uî't han.
+notSupportedOutdatedDetail = Nu unùkuaj Firefox nan gi'iaj sunj ngà sa 'iaj sun ngà icsend. Da'uît nāgi'iaj nakàt riña sa nana'uî't han.
 updateFirefox = Nagi'iaj nakà Firefox
 deletePopupCancel = Duyichin'
 deleteButtonHover = Dure'
@@ -33,8 +33,8 @@ footerLinkLegal = Nuguan' a'nï'ïn
 footerLinkPrivacy = Sa hùii
 footerLinkCookies = Nej kôki
 passwordTryAgain = Sê da'nga' huì dan huin. Ginù huin ñû.
-javascriptRequired = Ni'ñānj Firefox Send JavaScript
-whyJavascript = Nù huin saj ni'ñānj Firefox Send JavaScript rà'aj?
+javascriptRequired = Ni'ñānj icsend JavaScript
+whyJavascript = Nù huin saj ni'ñānj icsend JavaScript rà'aj?
 enableJavascript = Gi'iaj sunūj u ga'nïn gi'iaj sun JavaScript nī yakāj da'nga' ñû.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }h { $minutes }m
@@ -47,9 +47,9 @@ passwordSetError = Na'ue gārayinaj da'nga huìi
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Hìo nī huì ga’ue duyingâ’t archîbo

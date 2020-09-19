@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Zipu
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = Mbubata…
 encryptingFile = ezoro ezo...
 decryptingFile = Kpebie
@@ -19,7 +19,7 @@ unlockButtonLabel = imeghe
 downloadButtonLabel = budata
 downloadFinish = Mbudata zuru ezu
 fileSizeProgress = ({ $partialSize } nke { $totalSize })
-sendYourFilesLink = Firefox Zipu
+sendYourFilesLink = icsend
 errorPageHeader = Onwere ihe na-adighi mma
 fileTooBig = Failu a ebuka ibulite. Ọ kwẹsịghi ịkalị { $size }
 linkExpiredAlt = Njiko jedebe
@@ -34,7 +34,7 @@ footerLinkPrivacy = nzuzo
 footerLinkCookies = Kuki ga
 passwordTryAgain = okwuntughe ezighi ezi.Nwaa ọzọ
 javascriptRequired = Firefox Zipu chọrọ
-whyJavascript = Kedu ihe kpatara Firefox Send jiri chọ JavaScript?
+whyJavascript = Kedu ihe kpatara icsend jiri chọ JavaScript?
 enableJavascript = Biko họrọ JavaScript ma nwaa ọzọ
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }h { $minutes }m
@@ -47,9 +47,9 @@ passwordSetError = Enweghị ike ịtọ paswọọdụ a
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Zipu, Ziga
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Mfe, nkekọrịta faịlụ nkeonwe

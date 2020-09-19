@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send je oruko ile-ise kan, kò sì ye ki a so di ibile.
+# icsend is a brand name and should not be localized.
+title = icsend je oruko ile-ise kan, kò sì ye ki a so di ibile.
 importingFile = akowọle…
 encryptingFile = Fifi ọrọ ṣiṣẹ…
 decryptingFile = Ti nkọ nkan…
@@ -24,17 +24,17 @@ downloadFinish =
     Ìsíwá parí
     Ìgbasílẹ̀ parí
 sendYourFilesLink =
-    Gbìyànjúu Firefox Send
-    Gbìyànjú lo Firefox Send
-    Dán Firefox Send wò
+    Gbìyànjúu icsend
+    Gbìyànjú lo icsend
+    Dán icsend wò
 errorPageHeader = Nnkan o lo daadaa!
 fileTooBig =
     Fáìlì yìí tóbijù láti gbà sókè. Ó ní láti kéré sí { $size }
     Fáìlì yìí tóbijù láti gbà sókè. Ó ní láti kéré ju { $size } lọ
 linkExpiredAlt =
-    Ojú-òpó ti kásẹ̀ 
-    Ojú-òpó ti pajújé 
-    Ọ̀nà-òpó ti kásẹ̀ 
+    Ojú-òpó ti kásẹ̀
+    Ojú-òpó ti pajújé
+    Ọ̀nà-òpó ti kásẹ̀
     Ọ̀nà-òpó ti pajújé
 notSupportedHeader =
     Èrọ-ìfarakọ́ra rẹ ò ní ìbátan
@@ -44,7 +44,7 @@ notSupportedLink =
     Kí ló ṣe tí ẹ̀rọ-aṣàwárí mi ò ní ìbátan?
     Kí nìdí tí ẹ̀rọ-ìfarakọ́ra mi ò ní ìbátan?
     Kí nìdí tí ẹ̀rọ-aṣàwárí mi ò ní ìbátan?
-notSupportedOutdatedDetail = Ó ṣe, wípé ẹ̀dà Firefox yí ò ní àtìlẹyìn ẹ̀rọ-alátagbà tí ó ń mú Firefox Send ṣiṣẹ́. O ní láti ṣe àgbéga èdà ẹ̀rọ-aṣàwárí rẹ kó bágbàmu.
+notSupportedOutdatedDetail = Ó ṣe, wípé ẹ̀dà Firefox yí ò ní àtìlẹyìn ẹ̀rọ-alátagbà tí ó ń mú icsend ṣiṣẹ́. O ní láti ṣe àgbéga èdà ẹ̀rọ-aṣàwárí rẹ kó bágbàmu.
 updateFirefox = Mú Firefox bágbàmu
 deletePopupCancel =
     Nù kúrò
@@ -64,7 +64,7 @@ footerLinkCookies =
 passwordTryAgain =
     Ọ̀rọ̀-aṣínà kò tọ́. Gbìyànjú síi
     Ọ̀rọ̀-aṣíde kò tọ́. Gbìyànjú síi
-javascriptRequired = Firefox Send nílòo JavaScript
+javascriptRequired = icsend nílòo JavaScript
 whyJavascript =
     Kí nìdí tí Firefox fi nílòo JavaScript?
     Kí nìdí tí Firefox ṣe nílòo JavaScript?
@@ -86,11 +86,9 @@ passwordSetError =
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand =
-    Fi ránṣẹ́
-    Firánṣẹ́
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle =

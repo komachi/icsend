@@ -1,26 +1,6 @@
 const html = require('choo/html');
 const raw = require('choo/html/raw');
-const config = require('./config');
 const clientConstants = require('./clientConstants');
-
-let sentry = '';
-if (config.sentry_id) {
-  //eslint-disable-next-line node/no-missing-require
-  const version = require('../dist/version.json');
-  sentry = `
-var SENTRY_CONFIG = {
-  dsn: '${config.sentry_id}',
-  release: '${version.version}',
-  beforeSend: function (data) {
-    var hash = window.location.hash;
-    if (hash) {
-      return JSON.parse(JSON.stringify(data).replace(new RegExp(hash.slice(1), 'g'), ''));
-    }
-    return data;
-  }
-}
-`;
-}
 
 module.exports = function(state) {
   const authConfig = state.authConfig
@@ -49,7 +29,6 @@ module.exports = function(state) {
     state.downloadMetadata ? raw(JSON.stringify(state.downloadMetadata)) : '{}'
   };
   ${authConfig};
-  ${sentry}
   `;
   return state.cspNonce
     ? html`

@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = Se importă…
 encryptingFile = Se criptează…
 decryptingFile = Se decriptează…
@@ -21,13 +21,13 @@ unlockButtonLabel = Deblochează
 downloadButtonLabel = Descarcă
 downloadFinish = Descărcare încheiată
 fileSizeProgress = ({ $partialSize } din { $totalSize })
-sendYourFilesLink = Încearcă Firefox Send
+sendYourFilesLink = Încearcă icsend
 errorPageHeader = Ceva nu a funcționat!
 fileTooBig = Acest fișier este prea mare. Ar trebuie să fie sub { $size }.
 linkExpiredAlt = Link expirat
 notSupportedHeader = Browserul tău nu este suportat.
 notSupportedLink = De ce browserul meu nu este suportat?
-notSupportedOutdatedDetail = Din păcate, această versiune de Firefox nu suportă tehnologiile web din spatele Firefox Send. Va trebui să actualizezi browserul.
+notSupportedOutdatedDetail = Din păcate, această versiune de Firefox nu suportă tehnologiile web din spatele icsend. Va trebui să actualizezi browserul.
 updateFirefox = Actualizează Firefox
 deletePopupCancel = Renunță
 deleteButtonHover = Șterge
@@ -35,8 +35,8 @@ footerLinkLegal = Mențiuni legale
 footerLinkPrivacy = Confidențialitate
 footerLinkCookies = Cookie-uri
 passwordTryAgain = Parolă incorectă. Încearcă din nou.
-javascriptRequired = Firefox Send necesită JavaScript
-whyJavascript = De ce Firefox Send necesită JavaScript?
+javascriptRequired = icsend necesită JavaScript
+whyJavascript = De ce icsend necesită JavaScript?
 enableJavascript = Te rugăm să reactivezi JavaScript și să încerci din nou.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }h { $minutes }m
@@ -49,9 +49,9 @@ passwordSetError = Această parolă nu a putut fi setată
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Partajare de fișiere simplă și privată

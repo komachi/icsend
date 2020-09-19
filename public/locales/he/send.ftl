@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = מתבצע ייבוא…
 encryptingFile = מתבצעת הצפנה...
 decryptingFile = מתבצע פענוח...
@@ -20,13 +20,13 @@ unlockButtonLabel = שחרור נעילה
 downloadButtonLabel = הורדה
 downloadFinish = ההורדה הושלמה
 fileSizeProgress = ({ $partialSize } מתוך { $totalSize })
-sendYourFilesLink = נסו את Firefox Send
+sendYourFilesLink = נסו את icsend
 errorPageHeader = משהו השתבש!
 fileTooBig = הקובץ הזה גדול מידי להעלאה. עליו להיות קטן מ־{ $size }.
 linkExpiredAlt = הקישור פג
 notSupportedHeader = הדפדפן שלך לא נתמך.
 notSupportedLink = למה אין תמיכה בדפדפן שלי?
-notSupportedOutdatedDetail = לצערנו גרסת Firefox זו לא תומכת בטכנולוגית הרשת שמפעילה את Firefox Send. יש לעדכן את הגרסה של הדפדפן שלך.
+notSupportedOutdatedDetail = לצערנו גרסת Firefox זו לא תומכת בטכנולוגית הרשת שמפעילה את icsend. יש לעדכן את הגרסה של הדפדפן שלך.
 updateFirefox = עדכון Firefox
 deletePopupCancel = ביטול
 deleteButtonHover = מחיקה
@@ -34,8 +34,8 @@ footerLinkLegal = מידע משפטי
 footerLinkPrivacy = פרטיות
 footerLinkCookies = קובצי עוגיות
 passwordTryAgain = סיסמה שגויה. נא לנסות שוב.
-javascriptRequired = ל־Firefox Send דרוש JavaScript
-whyJavascript = למה ל־Firefox Send דרוש JavaScript?
+javascriptRequired = ל־icsend דרוש JavaScript
+whyJavascript = למה ל־icsend דרוש JavaScript?
 enableJavascript = נא להפעיל JavaScript ולנסות שוב.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours } שע׳ { $minutes } דק׳
@@ -48,9 +48,9 @@ passwordSetError = לא ניתן להגדיר את הססמה הזאת
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = שיתוף קבצים פרטי ופשוט

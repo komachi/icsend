@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 siteFeedback = Rutzijol
 importingFile = Tajin nijik…
 encryptingFile = Tajin newäx rusik'ixik…
@@ -20,13 +20,13 @@ unlockButtonLabel = Titzij chik
 downloadButtonLabel = Tiqasäx
 downloadFinish = Xtz'aqät qasanïk
 fileSizeProgress = ({ $partialSize } richin { $totalSize })
-sendYourFilesLink = Titojtob'ëx Firefox Send
+sendYourFilesLink = Titojtob'ëx icsend
 errorPageHeader = ¡K'o ri man ütz ta xub'än!
 fileTooBig = Yalan nïm re yakb'äl re' richin nijotob'äx. K'o ta chi man nik'o ta chi re ri { $size }.
 linkExpiredAlt = Xk'is ruq'ijul ri ximonel
 notSupportedHeader = Man koch'el ta ri awokik'amaya'l.
 notSupportedLink = ¿Achike ruma man nikoch' taq ri wokik'amaya'l?
-notSupportedOutdatedDetail = K'ayew ruma re ruwäch Firefox re' man nuköch' ta ri ajk'amaya'l na'ob'äl nrajo' ri Firefox Send. Rajowaxik nak'ëx ri awokik'amaya'l.
+notSupportedOutdatedDetail = K'ayew ruma re ruwäch Firefox re' man nuköch' ta ri ajk'amaya'l na'ob'äl nrajo' ri icsend. Rajowaxik nak'ëx ri awokik'amaya'l.
 updateFirefox = Tik'ex ri Firefox
 deletePopupCancel = Tiq'at
 deleteButtonHover = Tiyuj
@@ -34,8 +34,8 @@ footerLinkLegal = Taqanel tzijol
 footerLinkPrivacy = Ichinanem
 footerLinkCookies = Taq kaxlanwey
 passwordTryAgain = Itzel ri ewan tzij. Tatojtob'ej chik.
-javascriptRequired = K'atzinel JavaScript chi re ri Firefox Send
-whyJavascript = ¿Achike ruma toq ri Firefox Send nrajo' JavaScript?
+javascriptRequired = K'atzinel JavaScript chi re ri icsend
+whyJavascript = ¿Achike ruma toq ri icsend nrajo' JavaScript?
 enableJavascript = Titz'ij JavaScript richin nitojtob'ëx chik.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }r { $minutes }ch
@@ -48,9 +48,9 @@ passwordSetError = Man tikirel ta ninuk' re ewan tzij re'
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Titaq
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Kijunamaxik relik chuqa' ichinan yakb'äl

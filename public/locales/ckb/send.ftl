@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 siteFeedback = ڕەخنەوپێشنیار
 importingFile = هاوردەکردن...
 encryptingFile = بەهێماکردن...
@@ -26,7 +26,7 @@ fileTooBig = ئەم پەڕگەیە زۆر گەورەیە بۆ بارکردن. پ
 linkExpiredAlt = بەستەر بەسەرچووە
 notSupportedHeader = وێبگەڕەکەت پشتگیری ناکرێت
 notSupportedLink = بۆ وێبگەڕەکەم پشتگیری ناکرێت؟
-notSupportedOutdatedDetail = بەداخەوە ئەم وەشانەی Firefox پشتگیری ئەو جۆرە تەکنەلۆژییە ناکات کە پێویستە بۆ Firefox Send. پێویستە وێبگەڕەکەت نوێبکەیتەوە.
+notSupportedOutdatedDetail = بەداخەوە ئەم وەشانەی Firefox پشتگیری ئەو جۆرە تەکنەلۆژییە ناکات کە پێویستە بۆ icsend. پێویستە وێبگەڕەکەت نوێبکەیتەوە.
 updateFirefox = فاەرفۆکس نوێبکەرەوە
 deletePopupCancel = پاشگەزبوونەوە
 deleteButtonHover = سڕینەوە
@@ -48,9 +48,9 @@ passwordSetError = ناتوانرێت وشەی تێپەڕ دابنرێت
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = سانا، بڵاوکەرەوەی پەڕگەی تایبەتیی

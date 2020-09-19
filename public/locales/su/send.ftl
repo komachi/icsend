@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 importingFile = Ngimpor...
 encryptingFile = Ngénkripsi...
 decryptingFile = Ngadékripsi...
@@ -17,13 +17,13 @@ unlockButtonLabel = Laan konci
 downloadButtonLabel = Undeur
 downloadFinish = Undeuran anggeus
 fileSizeProgress = ({ $partialSize } ti { $totalSize })
-sendYourFilesLink = Pecakan Firefox Send
+sendYourFilesLink = Pecakan icsend
 errorPageHeader = Aya nu salah!
 fileTooBig = Koropak unjalkeuneun badag teuing. Kudu kurang ti { $size }.
 linkExpiredAlt = Tutumbu kadaluwarsa
 notSupportedHeader = Panyungsi anjeun teu dirojong
 notSupportedLink = Naha panyungsi kuring teu dirojong?
-notSupportedOutdatedDetail = Hanjakal Firefox vérsi ieu teu ngarojong téhnologi wéb nu ngagerakkeun Firefox Send. Anjeun perlu ngapdét panyungsi anjeun.
+notSupportedOutdatedDetail = Hanjakal Firefox vérsi ieu teu ngarojong téhnologi wéb nu ngagerakkeun icsend. Anjeun perlu ngapdét panyungsi anjeun.
 updateFirefox = Apdét Firefox
 deletePopupCancel = Bolay
 deleteButtonHover = Pupus
@@ -31,8 +31,8 @@ footerLinkLegal = Légal
 footerLinkPrivacy = Privasi
 footerLinkCookies = Réréméh
 passwordTryAgain = Kecap sandi salah. Pecakan deui.
-javascriptRequired = Firefox Send merlukeun JavaScript
-whyJavascript = Naha Firefox Send merlukeun JavaScript?
+javascriptRequired = icsend merlukeun JavaScript
+whyJavascript = Naha icsend merlukeun JavaScript?
 enableJavascript = Prak hurungkeun JavaScript sarta pecakan deui.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }j { $minutes }m
@@ -45,9 +45,9 @@ passwordSetError = Ieu kecap sandi teu bisa disét
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Send
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Simpel, babagi koropak privat

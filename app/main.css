@@ -182,19 +182,6 @@ footer li:hover {
   @apply bg-white;
 }
 
-.mozilla-logo {
-  background-image: url('../assets/mozilla-logo.svg');
-  background-repeat: no-repeat;
-  background-size: 100px, 48px;
-  overflow: hidden;
-  text-indent: 120%;
-  white-space: nowrap;
-  display: inline-block;
-  height: 32px;
-  width: 100px;
-  flex-shrink: 0;
-}
-
 #password-msg::after {
   content: '\200b';
 }
@@ -337,11 +324,6 @@ select {
     @apply bg-grey-90;
   }
 
-  .mozilla-logo {
-    background-color: white;
-    border: 1px solid white;
-  }
-
   @screen md {
     .main > section {
       @apply border;
@@ -375,19 +357,7 @@ select {
   line-break: anywhere;
 }
 
-.signin {
-  backface-visibility: hidden;
-  border-radius: 6px;
-  transition-property: transform, background-color;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.07, 0.95, 0, 1);
-}
-
-.signin:hover,
-.signin:focus {
-  transform: scale(1.0625);
-}
-
-.signin:hover:active {
-  transform: scale(0.9375);
+.logo {
+  font-weight: 200;
+  margin-bottom: -0.75em;
 }

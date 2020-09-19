@@ -1,13 +1,10 @@
 import FileSender from './fileSender';
 import FileReceiver from './fileReceiver';
 import { copyToClipboard, delay, openLinksInNewTab, percent } from './utils';
-import * as metrics from './metrics';
-import { bytes, locale } from './utils';
+import { bytes } from './utils';
 import okDialog from './ui/okDialog';
 import copyDialog from './ui/copyDialog';
 import shareDialog from './ui/shareDialog';
-import signupDialog from './ui/signupDialog';
-import surveyDialog from './ui/surveyDialog';
 
 export default function(state, emitter) {
   let lastRender = 0;
@@ -15,14 +12,6 @@ export default function(state, emitter) {
 
   function render() {
     emitter.emit('render');
-  }
-
-  async function checkFiles() {
-    const changes = await state.user.syncFileList();
-    const rerender = changes.incoming || changes.downloadCount;
-    if (rerender) {
-      render();
-    }
   }
 
   function updateProgress() {
@@ -38,21 +27,10 @@ export default function(state, emitter) {
       updateTitle = false;
       emitter.emit('DOMTitleChange', 'Firefox Send');
     });
-    checkFiles();
   });
 
   emitter.on('render', () => {
     lastRender = Date.now();
-  });
-
-  emitter.on('login', email => {
-    state.user.login(email);
-  });
-
-  emitter.on('logout', async () => {
-    await state.user.logout();
-    metrics.loggedOut({ trigger: 'button' });
-    emitter.emit('pushState', '/');
   });
 
   emitter.on('removeUpload', file => {
@@ -65,18 +43,10 @@ export default function(state, emitter) {
 
   emitter.on('delete', async ownedFile => {
     try {
-      metrics.deletedUpload({
-        size: ownedFile.size,
-        time: ownedFile.time,
-        speed: ownedFile.speed,
-        type: ownedFile.type,
-        ttl: ownedFile.expiresAt - Date.now(),
-        location
-      });
       state.storage.remove(ownedFile.id);
       await ownedFile.del();
     } catch (e) {
-      state.sentry.captureException(e);
+      // NOOP
     }
     render();
   });
@@ -97,9 +67,6 @@ export default function(state, emitter) {
         state.LIMITS.MAX_FILES_PER_ARCHIVE
       );
     } catch (e) {
-      if (e.message === 'fileTooBig' && maxSize < state.LIMITS.MAX_FILE_SIZE) {
-        return emitter.emit('signup-cta', 'size');
-      }
       state.modal = okDialog(
         state.translate(e.message, {
           size: bytes(maxSize),
@@ -108,30 +75,6 @@ export default function(state, emitter) {
       );
     }
     render();
-  });
-
-  emitter.on('signup-cta', source => {
-    const query = state.query;
-    state.user.startAuthFlow(source, {
-      campaign: query.utm_campaign,
-      content: query.utm_content,
-      medium: query.utm_medium,
-      source: query.utm_source,
-      term: query.utm_term
-    });
-    state.modal = signupDialog(source);
-    render();
-  });
-
-  emitter.on('authenticate', async (code, oauthState) => {
-    try {
-      await state.user.finishLogin(code, oauthState);
-      await state.user.syncFileList();
-      emitter.emit('replaceState', '/');
-    } catch (e) {
-      emitter.emit('replaceState', '/error');
-      setTimeout(render);
-    }
   });
 
   emitter.on('upload', async () => {
@@ -155,12 +98,9 @@ export default function(state, emitter) {
 
     const links = openLinksInNewTab();
     await delay(200);
-    const start = Date.now();
     try {
       const ownedFile = await sender.upload(archive, state.user.bearerToken);
       state.storage.totalUploads += 1;
-      const duration = Date.now() - start;
-      metrics.completedUpload(archive, duration);
 
       state.storage.addFile(ownedFile);
       // TODO integrate password into /upload request
@@ -176,7 +116,6 @@ export default function(state, emitter) {
     } catch (err) {
       if (err.message === '0') {
         //cancelled. do nothing
-        metrics.cancelledUpload(archive, err.duration);
         render();
       } else if (err.message === '401') {
         const refreshed = await state.user.refresh();
@@ -187,12 +126,6 @@ export default function(state, emitter) {
       } else {
         // eslint-disable-next-line no-console
         console.error(err);
-        state.sentry.withScope(scope => {
-          scope.setExtra('duration', err.duration);
-          scope.setExtra('size', err.size);
-          state.sentry.captureException(err);
-        });
-        metrics.stoppedUpload(archive, err.duration);
         emitter.emit('pushState', '/error');
       }
     } finally {
@@ -200,7 +133,6 @@ export default function(state, emitter) {
       archive.clear();
       state.uploading = false;
       state.transfer = null;
-      await state.user.syncFileList();
       render();
     }
   });
@@ -242,13 +174,11 @@ export default function(state, emitter) {
     render();
   });
 
-  emitter.on('download', async file => {
+  emitter.on('download', async () => {
     state.transfer.on('progress', updateProgress);
     state.transfer.on('decrypting', render);
     state.transfer.on('complete', render);
     const links = openLinksInNewTab();
-    const size = file.size;
-    const start = Date.now();
     try {
       const dl = state.transfer.download({
         stream: state.capabilities.streamDownload,
@@ -257,12 +187,6 @@ export default function(state, emitter) {
       render();
       await dl;
       state.storage.totalDownloads += 1;
-      const duration = Date.now() - start;
-      metrics.completedDownload({
-        size,
-        duration,
-        password_protected: file.requiresPassword
-      });
     } catch (err) {
       if (err.message === '0') {
         // download cancelled
@@ -274,20 +198,6 @@ export default function(state, emitter) {
         const location = ['404', '403'].includes(err.message)
           ? '/404'
           : '/error';
-        if (location === '/error') {
-          state.sentry.withScope(scope => {
-            scope.setExtra('duration', err.duration);
-            scope.setExtra('size', err.size);
-            scope.setExtra('progress', err.progress);
-            state.sentry.captureException(err);
-          });
-          const duration = Date.now() - start;
-          metrics.stoppedDownload({
-            size,
-            duration,
-            password_protected: file.requiresPassword
-          });
-        }
         emitter.emit('pushState', location);
       }
     } finally {
@@ -297,22 +207,10 @@ export default function(state, emitter) {
 
   emitter.on('copy', ({ url }) => {
     copyToClipboard(url);
-    // metrics.copiedLink({ location });
   });
 
   emitter.on('closeModal', () => {
-    if (
-      state.PREFS.surveyUrl &&
-      ['copy', 'share'].includes(state.modal.type) &&
-      locale().startsWith('en') &&
-      (state.storage.totalUploads > 1 || state.storage.totalDownloads > 0) &&
-      !state.user.surveyed
-    ) {
-      state.user.surveyed = true;
-      state.modal = surveyDialog();
-    } else {
-      state.modal = null;
-    }
+    state.modal = null;
     render();
   });
 
@@ -330,13 +228,6 @@ export default function(state, emitter) {
       emitter.emit('pushState', '/error');
     }
   });
-
-  setInterval(() => {
-    // poll for updates of the upload list
-    if (!state.modal && state.route === '/') {
-      checkFiles();
-    }
-  }, 2 * 60 * 1000);
 
   setInterval(() => {
     // poll for rerendering the file list countdown timers

@@ -7,7 +7,6 @@ const config = require('../config');
 const auth = require('../middleware/auth');
 const language = require('../middleware/language');
 const pages = require('./pages');
-const filelist = require('./filelist');
 const clientConstants = require('../clientConstants');
 
 const IS_DEV = config.env === 'development';
@@ -51,36 +50,6 @@ module.exports = function(app) {
         reportUri: '/__cspreport__'
       }
     };
-    if (config.fxa_client_id) {
-      csp.directives.connectSrc.push('https://accounts.firefox.com');
-      csp.directives.connectSrc.push('https://*.accounts.firefox.com');
-      csp.directives.imgSrc.push('https://firefoxusercontent.com');
-      csp.directives.imgSrc.push('https://secure.gravatar.com');
-    }
-    if (config.sentry_id) {
-      csp.directives.connectSrc.push(config.sentry_host);
-    }
-    if (
-      /^https:\/\/.*\.dev\.lcip\.org$/.test(config.base_url) ||
-      /^https:\/\/.*\.send\.nonprod\.cloudops\.mozgcp\.net$/.test(
-        config.base_url
-      )
-    ) {
-      csp.directives.connectSrc.push('https://*.dev.lcip.org');
-      csp.directives.imgSrc.push('https://*.dev.lcip.org');
-    }
-    if (config.fxa_csp_oauth_url != '') {
-      csp.directives.connectSrc.push(config.fxa_csp_oauth_url);
-    }
-    if (config.fxa_csp_content_url != '') {
-      csp.directives.connectSrc.push(config.fxa_csp_content_url);
-    }
-    if (config.fxa_csp_profile_url != '') {
-      csp.directives.connectSrc.push(config.fxa_csp_profile_url);
-    }
-    if (config.fxa_csp_profileimage_url != '') {
-      csp.directives.imgSrc.push(config.fxa_csp_profileimage_url);
-    }
 
     app.use(helmet.contentSecurityPolicy(csp));
   }
@@ -113,9 +82,6 @@ module.exports = function(app) {
     res.json(clientConstants);
   });
   app.get('/error', language, pages.blank);
-  app.get('/oauth', language, pages.blank);
-  app.get('/legal', language, pages.legal);
-  app.get('/login', language, pages.index);
   app.get('/report', language, pages.blank);
   app.get('/app.webmanifest', language, require('./webmanifest'));
   app.get(`/download/:id${ID_REGEX}`, language, pages.download);
@@ -134,15 +100,14 @@ module.exports = function(app) {
   );
   app.get(`/api/exists/:id${ID_REGEX}`, require('./exists'));
   app.get(`/api/metadata/:id${ID_REGEX}`, auth.hmac, require('./metadata'));
-  app.get('/api/filelist/:id([\\w-]{16})', auth.fxa, filelist.get);
-  app.post('/api/filelist/:id([\\w-]{16})', auth.fxa, filelist.post);
-  // app.post('/api/upload', auth.fxa, require('./upload'));
+  //app.get('/api/filelist/:id([\\w-]{16})', auth.fxa, filelist.get);
+  //app.post('/api/filelist/:id([\\w-]{16})', auth.fxa, filelist.post);
+  app.post('/api/upload', auth.hmac, require('./upload'));
   app.post(`/api/delete/:id${ID_REGEX}`, auth.owner, require('./delete'));
   app.post(`/api/password/:id${ID_REGEX}`, auth.owner, require('./password'));
   app.post(`/api/params/:id${ID_REGEX}`, auth.owner, require('./params'));
   app.post(`/api/info/:id${ID_REGEX}`, auth.owner, require('./info'));
   app.post(`/api/report/:id${ID_REGEX}`, auth.hmac, require('./report'));
-  app.post('/api/metrics', require('./metrics'));
   app.get('/__version__', function(req, res) {
     // eslint-disable-next-line node/no-missing-require
     res.sendFile(require.resolve('../../dist/version.json'));

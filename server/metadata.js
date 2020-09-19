@@ -19,7 +19,6 @@ class Metadata {
     this.nonce = obj.nonce;
     this.flagged = !!obj.flagged;
     this.dead = !!obj.dead;
-    this.fxa = !!+obj.fxa;
     this.storage = storage;
   }
 

@@ -1,5 +1,5 @@
-# Firefox Send is a brand name and should not be localized.
-title = Firefox Send
+# icsend is a brand name and should not be localized.
+title = icsend
 siteFeedback = Nikan uelis tikijkuilos tein tiknemilijtos
 importingFile = Mokalakijtok…
 encryptingFile = Motatijtok…
@@ -18,13 +18,13 @@ unlockButtonLabel = Xikajchiua tein amo kikaua maj tekiti
 downloadButtonLabel = Xiktemoui
 downloadFinish = Nochi motemouij ya
 fileSizeProgress = ({ $partialSize } itech { $totalSize })
-sendYourFilesLink = Xikejeko Firefox Send
+sendYourFilesLink = Xikejeko icsend
 errorPageHeader = ¡Tensa amo kuali kisak!
 fileTooBig = Nejin tajkuilol semi ueyi. Moneki amo panos { $size }
 linkExpiredAlt = Nejin tein tikpatskilij amo tekititok ya
 notSupportedHeader = Monavegador amo kualtia.
 notSupportedLink = ¿Keyej nonavegador amo kualtia?
-notSupportedOutdatedDetail = Tetayokoltij, Firefox tein tikuitok amo kiselia tepostekitilis tecnología web tein ika tekiti Firefox Send. Moneki tikyankuilis monavegador.
+notSupportedOutdatedDetail = Tetayokoltij, Firefox tein tikuitok amo kiselia tepostekitilis tecnología web tein ika tekiti icsend. Moneki tikyankuilis monavegador.
 updateFirefox = Maj Firefox  moyankuili
 deletePopupCancel = Maj motsakuili uan amo tami tein kichiujtok
 deleteButtonHover = Maj majchiua
@@ -32,8 +32,8 @@ footerLinkLegal = Keniuj motekitiltis
 footerLinkPrivacy = Keniuj tikyekpiaj tein tikseliaj
 footerLinkCookies = Cookies
 passwordTryAgain = Amo yektik ichtakatajtol. Oksepa xikijkuilo.
-javascriptRequired = Firefox Send kineki maj moajsi JavaScript
-whyJavascript = ¿Keyej Firefox Send kineki maj moajsi JavaScript?
+javascriptRequired = icsend kineki maj moajsi JavaScript
+whyJavascript = ¿Keyej icsend kineki maj moajsi JavaScript?
 enableJavascript = Se kualtakayot, xikaua maj peua tekiti JavaScript uan oksepa xikejeko.
 # A short representation of a countdown timer containing the number of hours and minutes remaining as digits, example "13h 47m"
 expiresHoursMinutes = { $hours }h { $minutes }m
@@ -46,9 +46,9 @@ passwordSetError = Nejin ichtakatajtol amo uel kiixtaliani
 
 ## Send version 2 strings
 
-# Firefox Send, Send, Firefox, Mozilla are proper names and should not be localized
--send-brand = Firefox Send
--send-short-brand = Xiktitani
+# icsend, Send, Firefox, Mozilla are proper names and should not be localized
+-send-brand = icsend
+-send-short-brand = icsend
 -firefox = Firefox
 -mozilla = Mozilla
 introTitle = Amo ouij uan ichtaka xikinpanoltili oksekin motajkuiloluan archivos

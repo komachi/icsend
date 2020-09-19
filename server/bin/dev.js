@@ -32,12 +32,9 @@ module.exports = function(app, devServer) {
   if (process.env.ANDROID) {
     // map all html routes to the android index.html
     app.get('/', android);
-    app.get('/legal', android);
+    app.get('/about', android);
     app.get(`/share/:id${ID_REGEX}`, android);
     app.get('/completed', android);
-    app.get('/preferences', android);
-    app.get('/options', android);
-    app.get('/oauth', android);
   }
   routes(app);
   tests(app);

@@ -100,31 +100,6 @@ const conf = convict({
     arg: 'port',
     env: 'PORT'
   },
-  amplitude_id: {
-    format: String,
-    default: '',
-    env: 'AMPLITUDE_ID'
-  },
-  analytics_id: {
-    format: String,
-    default: '',
-    env: 'GOOGLE_ANALYTICS_ID'
-  },
-  sentry_id: {
-    format: String,
-    default: '',
-    env: 'SENTRY_CLIENT'
-  },
-  sentry_dsn: {
-    format: String,
-    default: '',
-    env: 'SENTRY_DSN'
-  },
-  sentry_host: {
-    format: String,
-    default: 'https://sentry.prod.mozaws.net',
-    env: 'SENTRY_HOST'
-  },
   env: {
     format: ['production', 'development', 'test'],
     default: 'development',
@@ -147,58 +122,13 @@ const conf = convict({
   },
   base_url: {
     format: 'url',
-    default: 'https://send.firefox.com',
+    default: 'https://example.com',
     env: 'BASE_URL'
   },
   file_dir: {
     format: 'String',
     default: `${tmpdir()}${path.sep}send-${randomBytes(4).toString('hex')}`,
     env: 'FILE_DIR'
-  },
-  fxa_required: {
-    format: Boolean,
-    default: true,
-    env: 'FXA_REQUIRED'
-  },
-  fxa_url: {
-    format: 'url',
-    default: 'http://localhost:3030',
-    env: 'FXA_URL'
-  },
-  fxa_client_id: {
-    format: String,
-    default: '', // disabled
-    env: 'FXA_CLIENT_ID'
-  },
-  fxa_key_scope: {
-    format: String,
-    default: 'https://identity.mozilla.com/apps/send',
-    env: 'FXA_KEY_SCOPE'
-  },
-  fxa_csp_oauth_url: {
-    format: String,
-    default: '',
-    env: 'FXA_CSP_OAUTH_URL'
-  },
-  fxa_csp_content_url: {
-    format: String,
-    default: '',
-    env: 'FXA_CSP_CONTENT_URL'
-  },
-  fxa_csp_profile_url: {
-    format: String,
-    default: '',
-    env: 'FXA_CSP_PROFILE_URL'
-  },
-  fxa_csp_profileimage_url: {
-    format: String,
-    default: '',
-    env: 'FXA_CSP_PROFILEIMAGE_URL'
-  },
-  survey_url: {
-    format: String,
-    default: '',
-    env: 'SURVEY_URL'
   },
   ip_db: {
     format: String,

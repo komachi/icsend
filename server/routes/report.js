@@ -1,11 +1,12 @@
 const storage = require('../storage');
-const { statReportEvent } = require('../amplitude');
 
 module.exports = async function(req, res) {
   try {
     const id = req.params.id;
-    const meta = await storage.metadata(id);
+
     storage.flag(id);
+    /* TODO handle reporting without amplitude
+    const meta = await storage.metadata(id);
     statReportEvent({
       id,
       ip: req.ip,
@@ -17,6 +18,7 @@ module.exports = async function(req, res) {
       download_count: meta.dl,
       agent: req.ua.browser.name || req.ua.ua.substring(0, 6)
     });
+    */
     res.sendStatus(200);
   } catch (e) {
     res.sendStatus(404);

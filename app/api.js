@@ -7,9 +7,6 @@ try {
 } catch (e) {
   // NOOP
 }
-if (!fileProtocolWssUrl) {
-  fileProtocolWssUrl = 'wss://send.firefox.com/api/ws';
-}
 
 export class ConnectionError extends Error {
   constructor(cancelled, duration, size) {
@@ -406,17 +403,6 @@ export async function setFileList(bearerToken, kid, data) {
     body: data
   });
   return response.ok;
-}
-
-export function sendMetrics(blob) {
-  if (!navigator.sendBeacon) {
-    return;
-  }
-  try {
-    navigator.sendBeacon(getApiUrl('/api/metrics'), blob);
-  } catch (e) {
-    console.error(e);
-  }
 }
 
 export async function getConstants() {
