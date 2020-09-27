@@ -1,22 +1,8 @@
-const assets = require('../../common/assets');
-
 module.exports = function(req, res) {
   const manifest = {
-    name: 'Justsend',
-    short_name: 'Send',
+    name: 'icsend',
+    short_name: 'icsend',
     lang: req.language,
-    icons: [
-      {
-        src: assets.get('android-chrome-192x192.png'),
-        type: 'image/png',
-        sizes: '192x192'
-      },
-      {
-        src: assets.get('android-chrome-512x512.png'),
-        type: 'image/png',
-        sizes: '512x512'
-      }
-    ],
     start_url: '/',
     display: 'standalone',
     orientation: 'portrait',

@@ -63,9 +63,9 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.10.4",
-    "@dannycoates/webcrypto-liner": "^0.1.37",
+    "webcrypto-liner": "^1.2.3",
     "@fullhuman/postcss-purgecss": "^1.3.0",
-    "@mattiasbuelens/web-streams-polyfill": "0.2.1",
+    "web-streams-polyfill": "^3.0.0",
     "asmcrypto.js": "^0.22.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.2.0",
@@ -126,7 +126,6 @@
     "webpack-unassert-loader": "^1.2.0"
   },
   "dependencies": {
-    "@dannycoates/express-ws": "^5.0.3",
     "@fluent/bundle": "^0.13.0",
     "@fluent/langneg": "^0.3.0",
     "@google-cloud/storage": "^5.1.2",
@@ -135,16 +134,20 @@
     "body-parser": "^1.19.0",
     "choo": "^7.0.0",
     "cldr-core": "^35.1.0",
-    "configstore": "github:dannycoates/configstore#45c19536db34e7005a50b435582692886322ab36",
+    "configstore": "^5.0.1",
+    "connect-redis": "^5.0.0",
     "convict": "^5.2.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-ws": "^4.0.0",
     "helmet": "^3.23.3",
     "mkdirp": "^0.5.1",
     "mozlog": "^2.2.0",
     "node-fetch": "^2.6.0",
     "redis": "^3.0.2",
     "selenium-standalone": "^6.15.6",
-    "ua-parser-js": "^0.7.21"
+    "ua-parser-js": "^0.7.21",
+    "ws": "^7.3.1"
   },
   "availableLanguages": [
     "en-US",

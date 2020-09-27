@@ -1,3 +1,4 @@
+const WebSocket = require('ws');
 const crypto = require('crypto');
 const storage = require('../storage');
 const config = require('../config');
@@ -7,7 +8,7 @@ const { encryptedSize } = require('../../app/utils');
 
 const { Transform } = require('stream');
 
-const log = mozlog('send.upload');
+const log = mozlog('icsend.upload');
 
 module.exports = function(ws, req) {
   let fileStream;
@@ -28,9 +29,28 @@ module.exports = function(ws, req) {
       const dlimit = fileInfo.dlimit || 1;
       const metadata = fileInfo.fileMetadata;
       const auth = fileInfo.authorization;
-      const maxFileSize = config.anon_max_file_size;
-      const maxExpireSeconds = config.anon_max_expire_seconds;
-      const maxDownloads = config.anon_max_downloads;
+      const role = (req.session && req.session.role) || 'anon';
+      const maxFileSize =
+        role === 'instance_owner'
+          ? config.max_file_size
+          : config.anon_max_file_size;
+      const maxExpireSeconds =
+        role === 'instance_owner'
+          ? config.max_expire_seconds
+          : config.anon_max_expire_seconds;
+      const maxDownloads =
+        role === 'instance_owner'
+          ? config.max_downloads
+          : config.anon_max_downloads;
+
+      if (config.owner_only === true && role !== 'instance_owner') {
+        ws.send(
+          JSON.stringify({
+            error: 401
+          })
+        );
+        return ws.close();
+      }
 
       if (
         !metadata ||
@@ -76,7 +96,7 @@ module.exports = function(ws, req) {
           callback();
         }
       });
-      const wsStream = ws.constructor.createWebSocketStream(ws);
+      const wsStream = WebSocket.createWebSocketStream(ws);
 
       fileStream = wsStream.pipe(eof).pipe(limiter); // limiter needs to be the last in the chain
 

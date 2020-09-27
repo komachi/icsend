@@ -12,6 +12,7 @@ Run `docker build -t icsend .` to create an image or `docker-compose up` to run 
 | `MAX_FILE_SIZE` | in bytes (defaults to 2147483648)
 | `NODE_ENV`       | "production"
 | `BASE_URL`       | The HTTPS URL where traffic will be served (e.g. `https://example.com`)
+| `OWNER_TOKEN_HASH` | scrypt hashed owner token
 
 ## Example:
 

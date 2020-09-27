@@ -34,7 +34,7 @@ describe('Upload / Download flow', function() {
       await fr.download(options);
       assert.fail('downloaded again');
     } catch (e) {
-      assert.equal(e.message, '404');
+      assert.strictEqual(e.message, '404');
     }
   });
 
@@ -52,7 +52,7 @@ describe('Upload / Download flow', function() {
     });
     await fr.getMetadata();
     await fr.download(options);
-    assert.equal(fr.state, 'complete');
+    assert.strictEqual(fr.state, 'complete');
   });
 
   it('blocks invalid passwords from downloading', async function() {
@@ -71,7 +71,7 @@ describe('Upload / Download flow', function() {
       await fr.getMetadata();
       assert.fail('got metadata with bad password');
     } catch (e) {
-      assert.equal(e.message, '401');
+      assert.strictEqual(e.message, '401');
     }
     try {
       // We can't decrypt without IV from metadata
@@ -79,7 +79,7 @@ describe('Upload / Download flow', function() {
       await fr.download(options);
       assert.fail('downloaded file with bad password');
     } catch (e) {
-      assert.equal(e.message, '401');
+      assert.strictEqual(e.message, '401');
     }
   });
 
@@ -93,7 +93,7 @@ describe('Upload / Download flow', function() {
       requiresPassword: false
     });
     await fr.getMetadata();
-    assert.equal(fr.fileInfo.name, archive.name);
+    assert.strictEqual(fr.fileInfo.name, archive.name);
   });
 
   it('can cancel the upload', async function() {
@@ -104,7 +104,7 @@ describe('Upload / Download flow', function() {
       await up;
       assert.fail('not cancelled 1');
     } catch (e) {
-      assert.equal(e.message, '0');
+      assert.strictEqual(e.message, '0');
     }
     fs.reset();
     fs.once('encrypting', () => fs.cancel());
@@ -112,7 +112,7 @@ describe('Upload / Download flow', function() {
       await fs.upload(archive);
       assert.fail('not cancelled 2');
     } catch (e) {
-      assert.equal(e.message, '0');
+      assert.strictEqual(e.message, '0');
     }
     fs.reset();
     fs.once('progress', () => fs.cancel());
@@ -120,7 +120,7 @@ describe('Upload / Download flow', function() {
       await fs.upload(archive);
       assert.fail('not cancelled 3');
     } catch (e) {
-      assert.equal(e.message, '0');
+      assert.strictEqual(e.message, '0');
     }
   });
 
@@ -139,7 +139,7 @@ describe('Upload / Download flow', function() {
       await fr.download(options);
       assert.fail('not cancelled');
     } catch (e) {
-      assert.equal(e.message, '0');
+      assert.strictEqual(e.message, '0');
     }
   });
 
@@ -156,7 +156,7 @@ describe('Upload / Download flow', function() {
     await fr.getMetadata();
     await fr.download(options);
     await file.updateDownloadCount();
-    assert.equal(file.dtotal, 1);
+    assert.strictEqual(file.dtotal, 1);
   });
 
   it('does not increase download count when download cancelled', async function() {
@@ -176,7 +176,7 @@ describe('Upload / Download flow', function() {
       assert.fail('not cancelled');
     } catch (e) {
       await file.updateDownloadCount();
-      assert.equal(file.dtotal, 0);
+      assert.strictEqual(file.dtotal, 0);
     }
   });
 
@@ -194,16 +194,16 @@ describe('Upload / Download flow', function() {
     await fr.getMetadata();
     await fr.download(options);
     await file.updateDownloadCount();
-    assert.equal(file.dtotal, 1);
+    assert.strictEqual(file.dtotal, 1);
 
     await fr.download(options);
     await file.updateDownloadCount();
-    assert.equal(file.dtotal, 2);
+    assert.strictEqual(file.dtotal, 2);
     try {
       await fr.download(options);
       assert.fail('downloaded too many times');
     } catch (e) {
-      assert.equal(e.message, '404');
+      assert.strictEqual(e.message, '404');
     }
   });
 
@@ -221,7 +221,7 @@ describe('Upload / Download flow', function() {
       await fr.getMetadata();
       assert.fail('file still exists');
     } catch (e) {
-      assert.equal(e.message, '404');
+      assert.strictEqual(e.message, '404');
     }
   });
 });

@@ -17,7 +17,7 @@ class DB {
     } else {
       Storage = require('./fs');
     }
-    this.log = mozlog('send.storage');
+    this.log = mozlog('icsend.storage');
 
     this.storage = new Storage(config, this.log);
 

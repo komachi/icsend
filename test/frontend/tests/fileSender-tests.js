@@ -13,7 +13,7 @@ describe('FileSender', function() {
       const fs = new FileSender();
       const file = await fs.upload(archive);
       assert.ok(file.id);
-      assert.equal(file.name, archive.name);
+      assert.strictEqual(file.name, archive.name);
     });
   });
 });

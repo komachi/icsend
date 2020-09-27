@@ -2,7 +2,7 @@
 const assert = require('assert');
 const HomePage = require('./pages/desktop/home_page');
 
-describe('Firefox Send homepage', function() {
+describe('icsend homepage', function() {
   this.retries(2);
   const homePage = new HomePage();
   const baseUrl = browser.options['baseUrl'];
@@ -16,7 +16,7 @@ describe('Firefox Send homepage', function() {
   });
 
   it('should have the right title', function() {
-    assert.equal(browser.getTitle(), 'Firefox Send');
+    assert.equal(browser.getTitle(), 'icsend');
   });
 
   footerLinks.forEach((link, i) => {

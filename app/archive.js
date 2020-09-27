@@ -14,7 +14,7 @@ function isDupe(newFile, array) {
 }
 
 export default class Archive {
-  constructor(files = [], defaultTimeLimit = 86400) {
+  constructor(files = [], defaultTimeLimit = 10800) {
     this.files = Array.from(files);
     this.defaultTimeLimit = defaultTimeLimit;
     this.timeLimit = defaultTimeLimit;

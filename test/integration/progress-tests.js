@@ -2,7 +2,7 @@
 const assert = require('assert');
 const HomePage = require('./pages/desktop/home_page');
 
-describe('Firefox Send progress page', function() {
+describe('icsend progress page', function() {
   const homePage = new HomePage();
   beforeEach(function() {
     homePage.open();

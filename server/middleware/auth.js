@@ -1,6 +1,20 @@
+const session = require('express-session');
+const connectRedis = require('connect-redis');
 const assert = require('assert');
 const crypto = require('crypto');
 const storage = require('../storage');
+const config = require('../config');
+
+const redis_lib =
+  config.env === 'development' && config.redis_host === 'mock'
+    ? 'redis-mock'
+    : 'redis';
+const redis = require(redis_lib);
+
+let RedisStore = connectRedis(session);
+let redisClient = redis.createClient({
+  host: config.redis_host
+});
 
 module.exports = {
   hmac: async function(req, res, next) {
@@ -79,5 +93,18 @@ module.exports = {
     } else {
       res.sendStatus(401);
     }
-  }
+  },
+  instance_owner(req, res, next) {
+    if (req.session.role === 'instance_owner') {
+      next();
+    } else {
+      res.sendStatus(401);
+    }
+  },
+  sessionParser: session({
+    store: new RedisStore({ client: redisClient }),
+    secret: config.session_secret,
+    resave: false,
+    saveUninitialized: false
+  })
 };

@@ -40,7 +40,7 @@ describe('Streaming', function() {
         assert.ok(data.value.byteLength <= chunkSize, 'chunk too big');
         data = await reader.read();
       }
-      assert.equal(bytes, len);
+      assert.strictEqual(bytes, len);
     });
   });
 
@@ -59,7 +59,7 @@ describe('Streaming', function() {
         bytes += data.value.byteLength;
         data = await reader.read();
       }
-      assert.equal(bytes, len * count);
+      assert.strictEqual(bytes, len * count);
     });
   });
 
@@ -82,7 +82,7 @@ describe('Streaming', function() {
         state = await reader.read();
       }
 
-      assert.deepEqual(result, new Uint8Array(encrypted));
+      assert.deepStrictEqual(result, new Uint8Array(encrypted));
     });
 
     it('can decrypt', async function() {
@@ -97,13 +97,13 @@ describe('Streaming', function() {
         result = concat(result, state.value);
         state = await reader.read();
       }
-      assert.deepEqual(result, new Uint8Array(decrypted));
+      assert.deepStrictEqual(result, new Uint8Array(decrypted));
     });
   });
 
   describe('encryptedSize', function() {
     it('matches the size of an encrypted buffer', function() {
-      assert.equal(encryptedSize(buffer.length, rs), encrypted.length);
+      assert.strictEqual(encryptedSize(buffer.length, rs), encrypted.length);
     });
   });
 });

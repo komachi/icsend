@@ -405,17 +405,6 @@ export async function setFileList(bearerToken, kid, data) {
   return response.ok;
 }
 
-export async function getConstants() {
-  const response = await fetch(getApiUrl('/config'));
-
-  if (response.ok) {
-    const obj = await response.json();
-    return obj;
-  }
-
-  throw new Error(response.status);
-}
-
 export async function reportLink(id, keychain, reason) {
   const result = await fetchWithAuthAndRetry(
     getApiUrl(`/api/report/${id}`),
@@ -454,5 +443,30 @@ export async function downloadDone(id, dlToken) {
     headers,
     method: 'POST'
   });
+  return response.ok;
+}
+
+export async function login(token) {
+  const response = await fetch(getApiUrl(`/api/login`), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      token
+    })
+  });
+
+  return response.ok;
+}
+
+export async function logout() {
+  const response = await fetch(getApiUrl(`/api/logout`), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
   return response.ok;
 }

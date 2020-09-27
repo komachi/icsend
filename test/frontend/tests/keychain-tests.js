@@ -8,7 +8,7 @@ describe('Keychain', function() {
       const original = await k.authKeyB64();
       k.setPassword('foo', 'some://url');
       const pwd = await k.authKeyB64();
-      assert.notEqual(pwd, original);
+      assert.notStrictEqual(pwd, original);
     });
   });
 
@@ -21,8 +21,8 @@ describe('Keychain', function() {
       };
       const ciphertext = await k.encryptMetadata(meta);
       const result = await k.decryptMetadata(ciphertext);
-      assert.equal(result.name, meta.name);
-      assert.equal(result.type, meta.type);
+      assert.strictEqual(result.name, meta.name);
+      assert.strictEqual(result.type, meta.type);
     });
   });
 });

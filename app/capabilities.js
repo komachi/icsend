@@ -47,7 +47,7 @@ async function checkCrypto() {
   } catch (err) {
     try {
       window.asmCrypto = await import('asmcrypto.js');
-      await import('@dannycoates/webcrypto-liner/build/shim');
+      await import('webcrypto-liner/build/webcrypto-liner.shim.js');
       return true;
     } catch (e) {
       return false;
@@ -68,7 +68,7 @@ function checkStreams() {
 
 async function polyfillStreams() {
   try {
-    await import('@mattiasbuelens/web-streams-polyfill');
+    await import('web-streams-polyfill');
     return true;
   } catch (e) {
     return false;

@@ -6,7 +6,7 @@ const path = require('path');
 const DownloadPage = require('./pages/desktop/download_page');
 const HomePage = require('./pages/desktop/home_page');
 
-describe('Firefox Send', function() {
+describe('icsend', function() {
   const homePage = new HomePage();
   const downloadDir =
     browser.desiredCapabilities['moz:firefoxOptions']['prefs'][

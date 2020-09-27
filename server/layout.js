@@ -70,7 +70,7 @@ module.exports = function(state, body = '') {
           <p>
             <a
               class="link"
-              href="https://github.com/komachi/icsend/blob/master/docs/faq.md#why-does-justsend-require-javascript"
+              href="https://github.com/komachi/icsend/blob/master/docs/faq.md#why-does-icsend-require-javascript"
             >
               ${state.translate('whyJavascript')}
             </a>

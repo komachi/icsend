@@ -10,6 +10,7 @@ module.exports = function(app = choo({ hash: true })) {
   app.route('/error', body(require('./ui/error')));
   app.route('/blank', body(require('./ui/blank')));
   app.route('/report', body(require('./ui/report')));
+  app.route('/login', body(require('./ui/login')));
   app.route('*', body(require('./ui/notFound')));
   return app;
 };

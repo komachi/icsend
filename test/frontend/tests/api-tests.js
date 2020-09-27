@@ -55,7 +55,7 @@ describe('API', function() {
         await up.result;
         assert.fail('not cancelled');
       } catch (e) {
-        assert.equal(e.message, '0');
+        assert.strictEqual(e.message, '0');
       }
     });
   });

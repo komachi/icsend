@@ -54,25 +54,14 @@ module.exports = function(app) {
     app.use(helmet.contentSecurityPolicy(csp));
   }
 
+  app.use(auth.sessionParser);
+
   app.use(function(req, res, next) {
     res.set('Pragma', 'no-cache');
     res.set(
       'Cache-Control',
       'private, no-cache, no-store, must-revalidate, max-age=0'
     );
-    next();
-  });
-  app.use(function(req, res, next) {
-    try {
-      // set by the load balancer
-      const [country, state] = req.header('X-Client-Geo-Location').split(',');
-      req.geo = {
-        country,
-        state
-      };
-    } catch (e) {
-      req.geo = {};
-    }
     next();
   });
   app.use(bodyParser.json());
@@ -100,14 +89,13 @@ module.exports = function(app) {
   );
   app.get(`/api/exists/:id${ID_REGEX}`, require('./exists'));
   app.get(`/api/metadata/:id${ID_REGEX}`, auth.hmac, require('./metadata'));
-  //app.get('/api/filelist/:id([\\w-]{16})', auth.fxa, filelist.get);
-  //app.post('/api/filelist/:id([\\w-]{16})', auth.fxa, filelist.post);
-  app.post('/api/upload', auth.hmac, require('./upload'));
   app.post(`/api/delete/:id${ID_REGEX}`, auth.owner, require('./delete'));
   app.post(`/api/password/:id${ID_REGEX}`, auth.owner, require('./password'));
   app.post(`/api/params/:id${ID_REGEX}`, auth.owner, require('./params'));
   app.post(`/api/info/:id${ID_REGEX}`, auth.owner, require('./info'));
   app.post(`/api/report/:id${ID_REGEX}`, auth.hmac, require('./report'));
+  app.post('/api/login', require('./login'));
+  app.post('/api/logout', auth.instance_owner, require('./logout'));
   app.get('/__version__', function(req, res) {
     // eslint-disable-next-line node/no-missing-require
     res.sendFile(require.resolve('../../dist/version.json'));

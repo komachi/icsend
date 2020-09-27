@@ -159,3 +159,5 @@ reportReasonAbuse = These files contain illegal or abusive content.
 reportReasonCopyright = To report copyright or trademark infringement, use the process described at <a>this page</a>.
 reportedTitle = Files Reported
 reportedDescription = Thank you. We have received your report on these files.
+loginButton = Login
+tokenLoginError = Failed to auth with owner token

@@ -25,7 +25,7 @@ export default function(state, emitter) {
     document.addEventListener('blur', () => (updateTitle = true));
     document.addEventListener('focus', () => {
       updateTitle = false;
-      emitter.emit('DOMTitleChange', 'Firefox Send');
+      emitter.emit('DOMTitleChange', 'icsend');
     });
   });
 
@@ -227,6 +227,16 @@ export default function(state, emitter) {
       }
       emitter.emit('pushState', '/error');
     }
+  });
+
+  emitter.on('tokenLogin', async ({ token }) => {
+    await state.user.tokenLogin(token);
+    render();
+  });
+
+  emitter.on('logout', async () => {
+    await state.user.logout();
+    render();
   });
 
   setInterval(() => {

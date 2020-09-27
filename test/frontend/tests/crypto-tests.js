@@ -35,7 +35,7 @@ describe('webcrypto', function() {
       encoder.encode('hello world!')
     );
 
-    assert.equal(
+    assert.strictEqual(
       arrayToB64(new Uint8Array(ae)),
       'UXQQ4yVf55TRk9AZtz5QCwFofRvh-HdWJyxSCQ'
     );
@@ -56,7 +56,7 @@ describe('webcrypto', function() {
       ['sign']
     );
     const ahx = await crypto.subtle.exportKey('raw', ah);
-    assert.equal(
+    assert.strictEqual(
       arrayToB64(new Uint8Array(ahx)),
       'wxXDmHgmMgrcDVD8zbDLRl2yNa8jSAQgsaeIBZ4vueygpxzaTK6ZE_6X-XHvllBly6pSuFNbSxcve0ZHhVdcEA'
     );
@@ -69,7 +69,7 @@ describe('webcrypto', function() {
       ah,
       encoder.encode('test')
     );
-    assert.equal(
+    assert.strictEqual(
       arrayToB64(new Uint8Array(as)),
       'AOi4HcoCJxQ4nUYxlmHB1rlcxQBn-zVjrSHz-VW7S-I'
     );
@@ -94,7 +94,10 @@ describe('webcrypto', function() {
     );
     const bdx = await crypto.subtle.exportKey('raw', bd);
 
-    assert.equal(arrayToB64(new Uint8Array(bdx)), 'g7okjWWO9yueDz16-owShQ');
+    assert.strictEqual(
+      arrayToB64(new Uint8Array(bdx)),
+      'g7okjWWO9yueDz16-owShQ'
+    );
 
     const bh = await crypto.subtle.deriveKey(
       {
@@ -114,7 +117,7 @@ describe('webcrypto', function() {
 
     const bhx = await crypto.subtle.exportKey('raw', bh);
 
-    assert.equal(
+    assert.strictEqual(
       arrayToB64(new Uint8Array(bhx)),
       'TQOGtmQ8-ZfnWu6Iq-U1IAVBVREFuI17xqsW1shiC8eMCa-a5qeYTvoX3-5kCoCha8R59ycnPDnTz75clLBmbQ'
     );

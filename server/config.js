@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const convict = require('convict');
 const { tmpdir } = require('os');
 const path = require('path');
@@ -26,22 +27,22 @@ const conf = convict({
   },
   expire_times_seconds: {
     format: Array,
-    default: [300, 3600, 86400, 604800],
+    default: [300, 3600, 86400, 604800, Infinity],
     env: 'EXPIRE_TIMES_SECONDS'
   },
   default_expire_seconds: {
     format: Number,
-    default: 86400,
+    default: 300,
     env: 'DEFAULT_EXPIRE_SECONDS'
   },
   max_expire_seconds: {
     format: Number,
-    default: 86400 * 7,
+    default: Infinity,
     env: 'MAX_EXPIRE_SECONDS'
   },
   anon_max_expire_seconds: {
     format: Number,
-    default: 86400,
+    default: 10800,
     env: 'ANON_MAX_EXPIRE_SECONDS'
   },
   download_counts: {
@@ -51,12 +52,12 @@ const conf = convict({
   },
   max_downloads: {
     format: Number,
-    default: 100,
+    default: Infinity,
     env: 'MAX_DOWNLOADS'
   },
   anon_max_downloads: {
     format: Number,
-    default: 5,
+    default: 3,
     env: 'ANON_MAX_DOWNLOADS'
   },
   max_files_per_archive: {
@@ -107,12 +108,12 @@ const conf = convict({
   },
   max_file_size: {
     format: Number,
-    default: 1024 * 1024 * 1024 * 2.5,
+    default: 1024 * 1024 * 1024 * 5,
     env: 'MAX_FILE_SIZE'
   },
   anon_max_file_size: {
     format: Number,
-    default: 1024 * 1024 * 1024,
+    default: 1024 * 1024 * 20,
     env: 'ANON_MAX_FILE_SIZE'
   },
   l10n_dev: {
@@ -130,10 +131,25 @@ const conf = convict({
     default: `${tmpdir()}${path.sep}send-${randomBytes(4).toString('hex')}`,
     env: 'FILE_DIR'
   },
-  ip_db: {
+  owner_token_hash: {
     format: String,
     default: '',
-    env: 'IP_DB'
+    env: 'OWNER_TOKEN_HASH'
+  },
+  owner_only: {
+    format: Boolean,
+    default: false,
+    env: 'OWNER_ONLY'
+  },
+  session_secret: {
+    format: String,
+    default: crypto.randomBytes(64).toString('base64'),
+    env: 'SESSION_SECRET'
+  },
+  token_auth_client_salt: {
+    format: String,
+    default: crypto.randomBytes(64).toString('base64'),
+    env: 'TOKEN_AUTH_CLIENT_SALT'
   }
 });
 

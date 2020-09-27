@@ -1,7 +1,7 @@
 ##
-# Firefox Send - Mozilla
+# icsend
 #
-# License https://github.com/mozilla/send/blob/master/LICENSE
+# License https://github.com/komachi/icsend/blob/master/LICENSE
 ##
 
 

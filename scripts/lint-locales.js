@@ -6,12 +6,12 @@ const pkg = require('../package.json');
 const conf = require('../server/config');
 
 const exec = promisify(cp.exec);
-const cmd = `compare-locales l10n.toml . ${getLocales()} --data=json`;
+const cmd = `compare-locales l10n.toml . ${getLocales()} --json - --full`;
 
 console.log(cmd);
 
 exec(cmd)
-  .then(({ stdout }) => JSON.parse(stdout))
+  .then(({ stdout }) => JSON.parse(stdout)[0])
   .then(({ details }) => filterErrors(details))
   .then(results => {
     if (results.length) {
@@ -29,10 +29,10 @@ exec(cmd)
   });
 
 function filterErrors(details) {
-  return Object.keys(details)
+  return Object.keys(details['public/locales'])
     .sort()
     .map(locale => {
-      const data = details[locale]
+      const data = details['public/locales'][locale]
         .filter(item => Object.prototype.hasOwnProperty.call(item, 'error'))
         .map(({ error }) => error);
       return { locale, data };
