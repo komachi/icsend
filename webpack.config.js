@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const VersionPlugin = require('./build/version_plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const webJsOptions = {
   babelrc: false,
@@ -13,26 +13,26 @@ const webJsOptions = {
       {
         bugfixes: true,
         useBuiltIns: 'entry',
-        corejs: 3
-      }
-    ]
+        corejs: 3,
+      },
+    ],
   ],
   plugins: [
     '@babel/plugin-syntax-dynamic-import',
     'module:nanohtml',
-    ['@babel/plugin-proposal-class-properties', { loose: false }]
-  ]
+    ['@babel/plugin-proposal-class-properties', { loose: false }],
+  ],
 };
 
 const serviceWorker = {
   target: 'webworker',
   entry: {
-    serviceWorker: './app/serviceWorker.js'
+    serviceWorker: './app/serviceWorker.js',
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
   },
   devtool: 'source-map',
   module: {
@@ -41,8 +41,8 @@ const serviceWorker = {
         test: /\.(png|jpg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[contenthash:8].[ext]'
-        }
+          name: '[name].[contenthash:8].[ext]',
+        },
       },
       {
         test: /\.svg$/,
@@ -50,8 +50,8 @@ const serviceWorker = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[contenthash:8].[ext]'
-            }
+              name: '[name].[contenthash:8].[ext]',
+            },
           },
           {
             loader: 'svgo-loader',
@@ -59,33 +59,33 @@ const serviceWorker = {
               plugins: [
                 { removeViewBox: false }, // true causes stretched images
                 { convertStyleToAttrs: true }, // for CSP, no unsafe-eval
-                { removeTitle: true } // for smallness
-              ]
-            }
-          }
-        ]
+                { removeTitle: true }, // for smallness
+              ],
+            },
+          },
+        ],
       },
       {
         // loads all assets from assets/ for use by common/assets.js
         test: require.resolve('./common/generate_asset_map.js'),
-        use: ['babel-loader', 'val-loader']
-      }
-    ]
+        use: ['babel-loader', 'val-loader'],
+      },
+    ],
   },
-  plugins: [new webpack.IgnorePlugin(/\.\.\/dist/)]
+  plugins: [new webpack.IgnorePlugin(/\.\.\/dist/)],
 };
 
 const web = {
   target: 'web',
   entry: {
-    app: ['./app/main.js']
+    app: ['./app/main.js'],
     // android: ['./android/android.js'],
     // ios: ['./ios/ios.js']
   },
   output: {
     chunkFilename: '[name].[contenthash:8].js',
     filename: '[name].[contenthash:8].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -104,9 +104,9 @@ const web = {
                 'node_modules/@dannycoates/webcrypto-liner'
               ),
               path.resolve(__dirname, 'node_modules/@fluent'),
-              path.resolve(__dirname, 'node_modules/intl-pluralrules')
+              path.resolve(__dirname, 'node_modules/intl-pluralrules'),
             ],
-            options: webJsOptions
+            options: webJsOptions,
           },
           {
             // Strip asserts from our deps, mainly choojs family
@@ -116,18 +116,19 @@ const web = {
               path.resolve(__dirname, 'node_modules/@fluent'),
               path.resolve(__dirname, 'node_modules/@sentry'),
               path.resolve(__dirname, 'node_modules/tslib'),
-              path.resolve(__dirname, 'node_modules/webcrypto-core')
+              path.resolve(__dirname, 'node_modules/webcrypto-core'),
+              path.resolve(__dirname, 'node_modules/asmcrypto.js'),
             ],
-            loader: 'webpack-unassert-loader'
-          }
-        ]
+            loader: 'webpack-unassert-loader',
+          },
+        ],
       },
       {
         test: /\.(png|jpg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[contenthash:8].[ext]'
-        }
+          name: '[name].[contenthash:8].[ext]',
+        },
       },
       {
         test: /\.svg$/,
@@ -135,8 +136,8 @@ const web = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[contenthash:8].[ext]'
-            }
+              name: '[name].[contenthash:8].[ext]',
+            },
           },
           {
             loader: 'svgo-loader',
@@ -145,57 +146,58 @@ const web = {
                 { cleanupIDs: false },
                 { removeViewBox: false }, // true causes stretched images
                 { convertStyleToAttrs: true }, // for CSP, no unsafe-eval
-                { removeTitle: true } // for smallness
-              ]
-            }
-          }
-        ]
+                { removeTitle: true }, // for smallness
+              ],
+            },
+          },
+        ],
       },
       {
         // creates style.css with all styles
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1
-              }
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
             },
-            'postcss-loader'
-          ]
-        })
+          },
+          'postcss-loader',
+        ],
       },
       {
         test: /\.ftl$/,
-        use: 'raw-loader'
+        use: 'raw-loader',
       },
       {
         // creates test.js for /test
         test: require.resolve('./test/frontend/index.js'),
-        use: ['babel-loader', 'val-loader']
+        use: ['babel-loader', 'val-loader'],
       },
       {
         // loads all assets from assets/ for use by common/assets.js
         test: require.resolve('./common/generate_asset_map.js'),
-        use: ['babel-loader', 'val-loader']
-      }
-    ]
+        use: ['babel-loader', 'val-loader'],
+      },
+    ],
   },
   plugins: [
-    new CopyPlugin([
-      {
-        context: 'public',
-        from: '*.*'
-      }
-    ]),
+    new CopyPlugin({
+      patterns: [
+        {
+          context: 'public',
+          from: '*.*',
+        },
+      ],
+    }),
     new webpack.EnvironmentPlugin(['NODE_ENV', 'TOKEN_AUTH_CLIENT_SALT']),
     new webpack.IgnorePlugin(/\.\.\/dist/), // used in common/*.js
-    new ExtractTextPlugin({
-      filename: '[name].[md5:contenthash:8].css'
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
     }),
     new VersionPlugin(), // used for the /__version__ route
-    new ManifestPlugin() // used by server side to resolve hashed assets
+    new ManifestPlugin(), // used by server side to resolve hashed assets
   ],
   devtool: 'source-map',
   devServer: {
@@ -208,10 +210,10 @@ const web = {
       '/api/ws': {
         target: 'ws://localhost:1338',
         ws: true,
-        secure: false
-      }
-    }
-  }
+        secure: false,
+      },
+    },
+  },
 };
 
 module.exports = (env, argv) => {

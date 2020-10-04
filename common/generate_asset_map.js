@@ -13,17 +13,17 @@ const fs = require('fs');
 const path = require('path');
 
 function kv(f) {
-  return `"${f}": require('../assets/${f}')`;
+  return `"${f}": require('../assets/${f}').default`;
 }
 
-module.exports = function() {
+module.exports = function () {
   const files = fs.readdirSync(path.join(__dirname, '..', 'assets'));
   const code = `module.exports = {
     ${files.map(kv).join(',\n')}
   };`;
   return {
     code,
-    dependencies: files.map(f => require.resolve('../assets/' + f)),
-    cacheable: true
+    dependencies: files.map((f) => require.resolve('../assets/' + f)),
+    cacheable: true,
   };
 };

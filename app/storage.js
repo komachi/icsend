@@ -80,21 +80,6 @@ class Storage {
   set totalUploads(n) {
     this.engine.setItem('totalUploads', n);
   }
-  get referrer() {
-    return this.engine.getItem('referrer');
-  }
-  set referrer(str) {
-    this.engine.setItem('referrer', str);
-  }
-  get enrolled() {
-    return JSON.parse(this.engine.getItem('ab_experiments') || '{}');
-  }
-
-  enroll(id, variant) {
-    const enrolled = {};
-    enrolled[id] = variant;
-    this.engine.setItem('ab_experiments', JSON.stringify(enrolled));
-  }
 
   get files() {
     return Array.from(this._files.values()).sort(
@@ -111,7 +96,7 @@ class Storage {
   }
 
   set user(info) {
-    return this.engine.setItem('user', JSON.stringify(info));
+    this.engine.setItem('user', JSON.stringify(info));
   }
 
   getFileById(id) {
@@ -143,11 +128,11 @@ class Storage {
   }
 
   writeFiles() {
-    this._files.forEach(f => this.writeFile(f));
+    this._files.forEach((f) => this.writeFile(f));
   }
 
   clearLocalFiles() {
-    this._files.forEach(f => this.engine.removeItem(f.id));
+    this._files.forEach((f) => this.engine.removeItem(f.id));
     this._files = new Map();
   }
 
@@ -171,14 +156,14 @@ class Storage {
       outgoing = outgoing || f.expired;
       if (f.expired) {
         this.remove(f.id);
-      } else if (!files.find(x => x.id === f.id)) {
+      } else if (!files.find((x) => x.id === f.id)) {
         outgoing = true;
       }
     }
     return {
       incoming,
       outgoing,
-      downloadCount
+      downloadCount,
     };
   }
 

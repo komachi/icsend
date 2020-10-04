@@ -1,6 +1,5 @@
 const genmap = require('./generate_asset_map');
 const isServer = typeof genmap === 'function';
-let prefix = '';
 let manifest = {};
 try {
   //eslint-disable-next-line node/no-missing-require
@@ -12,24 +11,19 @@ try {
 const assets = isServer ? manifest : genmap;
 
 function getAsset(name) {
-  return prefix + assets[name];
-}
-
-function setPrefix(name) {
-  prefix = name;
+  return assets[name];
 }
 
 function getMatches(match) {
   return Object.keys(assets)
-    .filter(k => match.test(k))
+    .filter((k) => match.test(k))
     .map(getAsset);
 }
 
 const instance = {
-  setPrefix: setPrefix,
   get: getAsset,
   match: getMatches,
-  setMiddleware: function(middleware) {
+  setMiddleware: function (middleware) {
     function getManifest() {
       return JSON.parse(
         middleware.fileSystem.readFileSync(
@@ -40,16 +34,16 @@ const instance = {
     if (middleware) {
       instance.get = function getAssetWithMiddleware(name) {
         const m = getManifest();
-        return prefix + m[name];
+        return m[name];
       };
       instance.match = function matchAssetWithMiddleware(match) {
         const m = getManifest();
         return Object.keys(m)
-          .filter(k => match.test(k))
-          .map(k => prefix + m[k]);
+          .filter((k) => match.test(k))
+          .map((k) => m[k]);
       };
     }
-  }
+  },
 };
 
 module.exports = instance;

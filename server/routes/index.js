@@ -12,51 +12,31 @@ const clientConstants = require('../clientConstants');
 const IS_DEV = config.env === 'development';
 const ID_REGEX = '([0-9a-fA-F]{10,16})';
 
-module.exports = function(app) {
+module.exports = function (app) {
   app.set('trust proxy', true);
-  app.use(helmet());
   app.use(
-    helmet.hsts({
-      maxAge: 31536000,
-      force: !IS_DEV
+    helmet({
+      contentSecurityPolicy: !IS_DEV,
+      hsts: IS_DEV
+        ? false
+        : {
+            maxAge: 31536000,
+          },
     })
   );
-  app.use(function(req, res, next) {
+
+  app.use(function (req, res, next) {
     req.ua = uaparser(req.header('user-agent'));
     next();
   });
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     req.cspNonce = crypto.randomBytes(16).toString('hex');
     next();
   });
-  if (!IS_DEV) {
-    let csp = {
-      directives: {
-        defaultSrc: ["'self'"],
-        connectSrc: [
-          "'self'",
-          config.base_url.replace(/^https:\/\//, 'wss://')
-        ],
-        imgSrc: ["'self'"],
-        scriptSrc: [
-          "'self'",
-          function(req) {
-            return `'nonce-${req.cspNonce}'`;
-          }
-        ],
-        formAction: ["'none'"],
-        frameAncestors: ["'none'"],
-        objectSrc: ["'none'"],
-        reportUri: '/__cspreport__'
-      }
-    };
-
-    app.use(helmet.contentSecurityPolicy(csp));
-  }
 
   app.use(auth.sessionParser);
 
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     res.set('Pragma', 'no-cache');
     res.set(
       'Cache-Control',
@@ -67,7 +47,7 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(bodyParser.text());
   app.get('/', language, pages.index);
-  app.get('/config', function(req, res) {
+  app.get('/config', function (req, res) {
     res.json(clientConstants);
   });
   app.get('/error', language, pages.blank);
@@ -96,12 +76,12 @@ module.exports = function(app) {
   app.post(`/api/report/:id${ID_REGEX}`, auth.hmac, require('./report'));
   app.post('/api/login', require('./login'));
   app.post('/api/logout', auth.instance_owner, require('./logout'));
-  app.get('/__version__', function(req, res) {
+  app.get('/__version__', function (req, res) {
     // eslint-disable-next-line node/no-missing-require
     res.sendFile(require.resolve('../../dist/version.json'));
   });
 
-  app.get('/__lbheartbeat__', function(req, res) {
+  app.get('/__lbheartbeat__', function (req, res) {
     res.sendStatus(200);
   });
 

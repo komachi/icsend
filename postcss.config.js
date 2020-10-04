@@ -1,14 +1,12 @@
-class TailwindExtractor {
-  static extract(content) {
-    return content.match(/[A-Za-z0-9-_:/]+/g) || [];
-  }
-}
+const TailwindExtractor = (content) => {
+  return content.match(/[A-Za-z0-9-_:/]+/g) || [];
+};
 
 const options = {
   plugins: [
     require('tailwindcss')('./tailwind.config.js'),
-    require('postcss-preset-env')
-  ]
+    require('postcss-preset-env'),
+  ],
 };
 
 if (process.env.NODE_ENV === 'development') {
@@ -20,19 +18,19 @@ if (process.env.NODE_ENV === 'development') {
         './app/*.js',
         './app/ui/*.js',
         './android/*.js',
-        './android/pages/*.js'
+        './android/pages/*.js',
       ],
       extractors: [
         {
           extractor: TailwindExtractor,
-          extensions: ['js']
-        }
-      ]
+          extensions: ['js'],
+        },
+      ],
     })
   );
   options.plugins.push(
     require('cssnano')({
-      preset: 'default'
+      preset: 'default',
     })
   );
 }
