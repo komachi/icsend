@@ -78,7 +78,7 @@ function bytes(num) {
     try {
       nStr = n.toLocaleString(locale(), {
         minimumFractionDigits: decimalDigits,
-        maximumFractionDigits: decimalDigits
+        maximumFractionDigits: decimalDigits,
       });
     } catch (e) {
       // fall through
@@ -86,7 +86,7 @@ function bytes(num) {
   }
   return translate('fileSize', {
     num: nStr,
-    units: translate(UNITS[exponent])
+    units: translate(UNITS[exponent]),
   });
 }
 
@@ -114,7 +114,7 @@ function allowedCopy() {
 }
 
 function delay(delay = 100) {
-  return new Promise(resolve => setTimeout(resolve, delay));
+  return new Promise((resolve) => setTimeout(resolve, delay));
 }
 
 function fadeOut(selector) {
@@ -127,12 +127,12 @@ function fadeOut(selector) {
 function openLinksInNewTab(links, should = true) {
   links = links || Array.from(document.querySelectorAll('a:not([target])'));
   if (should) {
-    links.forEach(l => {
+    links.forEach((l) => {
       l.setAttribute('target', '_blank');
       l.setAttribute('rel', 'noopener noreferrer');
     });
   } else {
-    links.forEach(l => {
+    links.forEach((l) => {
       l.removeAttribute('target');
       l.removeAttribute('rel');
     });
@@ -202,12 +202,7 @@ async function streamToArrayBuffer(stream, size) {
 }
 
 function list(items, ulStyle = '', liStyle = '') {
-  const lis = items.map(
-    i =>
-      html`
-        <li class="${liStyle}">${i}</li>
-      `
-  );
+  const lis = items.map((i) => html` <li class="${liStyle}">${i}</li> `);
   return html`
     <ul class="${ulStyle}">
       ${lis}
@@ -237,14 +232,14 @@ function timeLeft(milliseconds) {
       id: 'expiresDaysHoursMinutes',
       days,
       hours: hours % 24,
-      minutes: minutes % 60
+      minutes: minutes % 60,
     };
   }
   if (hours >= 1) {
     return {
       id: 'expiresHoursMinutes',
       hours,
-      minutes: minutes % 60
+      minutes: minutes % 60,
     };
   } else if (hours === 0) {
     if (minutes === 0) {
@@ -269,7 +264,7 @@ function encryptedSize(size, rs = ECE_RECORD_SIZE, tagLength = TAG_LENGTH) {
   return 21 + size + chunk_meta * Math.ceil(size / (rs - chunk_meta));
 }
 
-let translate = function() {
+let translate = function () {
   throw new Error('uninitialized translate function. call setTranslate first');
 };
 function setTranslate(t) {
@@ -282,6 +277,17 @@ function concat(b1, b2) {
   result.set(b2, b1.length);
   return result;
 }
+
+const imageTypes = new Set([
+  'image/jpeg',
+  'image/pjpeg',
+  'image/png',
+  'image/svg+xml',
+  'image/gif',
+  'image/webp',
+]);
+
+const noSaveTypes = new Set([...imageTypes]);
 
 module.exports = {
   concat,
@@ -305,5 +311,7 @@ module.exports = {
   timeLeft,
   platform,
   encryptedSize,
-  setTranslate
+  setTranslate,
+  imageTypes,
+  noSaveTypes,
 };

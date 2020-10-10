@@ -7,7 +7,7 @@ import {
   metadata,
   getApiUrl,
   reportLink,
-  getDownloadToken
+  getDownloadToken,
 } from './api';
 import { blobStream } from './streams';
 import Zip from './zip';
@@ -39,7 +39,7 @@ export default class FileReceiver extends Nanobus {
   get sizes() {
     return {
       partialSize: bytes(this.progress[0]),
-      totalSize: bytes(this.progress[1])
+      totalSize: bytes(this.progress[1]),
     };
   }
 
@@ -73,7 +73,7 @@ export default class FileReceiver extends Nanobus {
     return new Promise((resolve, reject) => {
       const channel = new MessageChannel();
 
-      channel.port1.onmessage = function(event) {
+      channel.port1.onmessage = function (event) {
         if (event.data === undefined) {
           reject('bad response from serviceWorker');
         } else if (event.data.error !== undefined) {
@@ -92,7 +92,7 @@ export default class FileReceiver extends Nanobus {
     this.downloadRequest = await downloadFile(
       this.fileInfo.id,
       this.dlToken,
-      p => {
+      (p) => {
         this.progress = [p, this.fileInfo.size];
         this.emit('progress');
       }
@@ -111,11 +111,15 @@ export default class FileReceiver extends Nanobus {
         size = zip.size;
       }
       const plaintext = await streamToArrayBuffer(plainStream, size);
+      const dataView = new DataView(plaintext);
+      const blob = new Blob([dataView], { type: this.fileInfo.type });
+      this.fileURI = URL.createObjectURL(blob);
+
       if (!noSave) {
         await saveFile({
           plaintext,
           name: decodeURIComponent(this.fileInfo.name),
-          type: this.fileInfo.type
+          type: this.fileInfo.type,
         });
       }
       this.msg = 'downloadFinish';
@@ -129,7 +133,7 @@ export default class FileReceiver extends Nanobus {
 
   async downloadStream(noSave = false) {
     const start = Date.now();
-    const onprogress = p => {
+    const onprogress = (p) => {
       this.progress = [p, this.fileInfo.size];
       this.emit('progress');
     };
@@ -137,7 +141,7 @@ export default class FileReceiver extends Nanobus {
     this.downloadRequest = {
       cancel: () => {
         this.sendMessageToSw({ request: 'cancel', id: this.fileInfo.id });
-      }
+      },
     };
 
     try {
@@ -156,23 +160,20 @@ export default class FileReceiver extends Nanobus {
         size: this.fileInfo.size,
         nonce: this.keychain.nonce,
         dlToken: this.dlToken,
-        noSave
+        noSave,
       };
       await this.sendMessageToSw(info);
 
       onprogress(0);
 
+      const downloadUrl = getApiUrl(`/api/download/${this.fileInfo.id}`);
+      this.fileURI = downloadUrl;
       if (noSave) {
-        const res = await fetch(getApiUrl(`/api/download/${this.fileInfo.id}`));
+        const res = await fetch(downloadUrl);
         if (res.status !== 200) {
           throw new Error(res.status);
         }
       } else {
-        const downloadPath = `/api/download/${this.fileInfo.id}`;
-        let downloadUrl = getApiUrl(downloadPath);
-        if (downloadUrl === downloadPath) {
-          downloadUrl = `${location.protocol}//${location.host}${downloadPath}`;
-        }
         const a = document.createElement('a');
         a.href = downloadUrl;
         document.body.appendChild(a);
@@ -184,7 +185,7 @@ export default class FileReceiver extends Nanobus {
       while (prog < this.fileInfo.size) {
         const msg = await this.sendMessageToSw({
           request: 'progress',
-          id: this.fileInfo.id
+          id: this.fileInfo.id,
         });
         if (msg.progress === prog) {
           hangs++;
@@ -237,41 +238,11 @@ export default class FileReceiver extends Nanobus {
   }
 }
 
-async function saveFile(file) {
-  return new Promise(function(resolve, reject) {
-    const dataView = new DataView(file.plaintext);
-    const blob = new Blob([dataView], { type: file.type });
-
-    if (navigator.msSaveBlob) {
-      navigator.msSaveBlob(blob, file.name);
-      return resolve();
-    } else if (/iPhone|fxios/i.test(navigator.userAgent)) {
-      // This method is much slower but createObjectURL
-      // is buggy on iOS
-      const reader = new FileReader();
-      reader.addEventListener('loadend', function() {
-        if (reader.error) {
-          return reject(reader.error);
-        }
-        if (reader.result) {
-          const a = document.createElement('a');
-          a.href = reader.result;
-          a.download = file.name;
-          document.body.appendChild(a);
-          a.click();
-        }
-        resolve();
-      });
-      reader.readAsDataURL(blob);
-    } else {
-      const downloadUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = downloadUrl;
-      a.download = file.name;
-      document.body.appendChild(a);
-      a.click();
-      URL.revokeObjectURL(downloadUrl);
-      setTimeout(resolve, 100);
-    }
-  });
+function saveFile(file) {
+  const a = document.createElement('a');
+  a.href = this.fileURI;
+  a.download = file.name;
+  document.body.appendChild(a);
+  a.click();
+  URL.revokeObjectURL(this.fileURI);
 }

@@ -9,7 +9,7 @@ const {
   list,
   percent,
   platform,
-  timeLeft
+  timeLeft,
 } = require('../utils');
 const expiryOptions = require('./expiryOptions');
 
@@ -18,9 +18,9 @@ function expiryInfo(translate, archive) {
   return raw(
     translate('archiveExpiryInfo', {
       downloadCount: translate('downloadCount', {
-        num: archive.dlimit - archive.dtotal
+        num: archive.dlimit - archive.dtotal,
       }),
-      timespan: translate(l10n.id, l10n)
+      timespan: translate(l10n.id, l10n),
     })
   );
 }
@@ -44,9 +44,7 @@ function password(state) {
           autocomplete="off"
           onchange="${togglePasswordInput}"
         />
-        <label for="add-password">
-          ${state.translate('addPassword')}
-        </label>
+        <label for="add-password"> ${state.translate('addPassword')} </label>
       </div>
       <input
         id="password-input"
@@ -92,7 +90,7 @@ function password(state) {
 
     if (length === MAX_LENGTH) {
       pwdmsg.textContent = state.translate('maxPasswordLength', {
-        length: MAX_LENGTH
+        length: MAX_LENGTH,
       });
     } else {
       pwdmsg.textContent = '';
@@ -162,10 +160,10 @@ function archiveDetails(translate, archive) {
             />
           </svg>
           ${translate('fileCount', {
-            num: archive.manifest.files.length
+            num: archive.manifest.files.length,
           })}
         </summary>
-        ${list(archive.manifest.files.map(f => fileInfo(f)))}
+        ${list(archive.manifest.files.map((f) => fileInfo(f)))}
       </details>
     `;
   }
@@ -175,7 +173,7 @@ function archiveDetails(translate, archive) {
   }
 }
 
-module.exports = function(state, emit, archive) {
+module.exports = function (state, emit, archive) {
   const copyOrShare =
     state.capabilities.share || platform() === 'android'
       ? html`
@@ -217,9 +215,7 @@ module.exports = function(state, emit, archive) {
             ${state.translate('downloadButtonLabel')}
           </a>
         `
-      : html`
-          <div></div>
-        `;
+      : html` <div></div> `;
   return html`
     <send-archive
       id="archive-${archive.id}"
@@ -243,9 +239,7 @@ module.exports = function(state, emit, archive) {
       </div>
       ${archiveDetails(state.translate, archive)}
       <hr class="w-full border-t my-4 dark:border-grey-70" />
-      <div class="flex justify-between w-full">
-        ${dl} ${copyOrShare}
-      </div>
+      <div class="flex justify-between w-full">${dl} ${copyOrShare}</div>
     </send-archive>
   `;
 
@@ -275,7 +269,7 @@ module.exports = function(state, emit, archive) {
           title: state.translate('-send-brand'),
           text: `Download "${archive.name}" with icsend: simple, safe file sharing`,
           //state.translate('shareMessage', { name }),
-          url: archive.url
+          url: archive.url,
         });
       } catch (e) {
         // ignore
@@ -284,7 +278,7 @@ module.exports = function(state, emit, archive) {
   }
 };
 
-module.exports.wip = function(state, emit) {
+module.exports.wip = function (state, emit) {
   return html`
     <send-upload-area
       class="flex flex-col bg-white h-full w-full dark:bg-grey-90"
@@ -293,7 +287,7 @@ module.exports.wip = function(state, emit) {
       ${list(
         Array.from(state.archive.files)
           .reverse()
-          .map(f =>
+          .map((f) =>
             fileInfo(f, remove(f, state.translate('deleteButtonHover')))
           ),
         'flex-shrink bg-grey-10 rounded-t overflow-y-auto px-6 py-4 md:h-full md:max-h-half-screen dark:bg-black',
@@ -327,7 +321,7 @@ module.exports.wip = function(state, emit) {
           </label>
           <div class="font-normal text-sm text-grey-70 dark:text-grey-40">
             ${state.translate('totalSize', {
-              size: bytes(state.archive.size)
+              size: bytes(state.archive.size),
             })}
           </div>
         </div>
@@ -393,7 +387,7 @@ module.exports.wip = function(state, emit) {
   }
 };
 
-module.exports.uploading = function(state, emit) {
+module.exports.uploading = function (state, emit) {
   const progress = state.transfer.progressRatio;
   const progressPercent = percent(progress);
   const archive = state.archive;
@@ -407,12 +401,10 @@ module.exports.uploading = function(state, emit) {
         ${expiryInfo(state.translate, {
           dlimit: state.archive.dlimit,
           dtotal: 0,
-          expiresAt: Date.now() + 500 + state.archive.timeLimit * 1000
+          expiresAt: Date.now() + 500 + state.archive.timeLimit * 1000,
         })}
       </div>
-      <div class="link-blue text-sm font-medium mt-2">
-        ${progressPercent}
-      </div>
+      <div class="link-blue text-sm font-medium mt-2">${progressPercent}</div>
       <progress class="my-3" value="${progress}">${progressPercent}</progress>
       <button
         class="link-blue self-end font-medium"
@@ -431,11 +423,11 @@ module.exports.uploading = function(state, emit) {
   }
 };
 
-module.exports.empty = function(state, emit) {
+module.exports.empty = function (state, emit) {
   return html`
     <send-upload-area
       class="flex flex-col items-center justify-center border-2 border-dashed border-grey-transparent rounded px-6 py-16 h-full w-full dark:border-grey-60"
-      onclick="${e => {
+      onclick="${(e) => {
         if (e.target.tagName !== 'LABEL') {
           document.getElementById('file-upload').click();
         }
@@ -449,7 +441,7 @@ module.exports.empty = function(state, emit) {
       </div>
       <div class="pb-6 text-center text-base">
         ${state.translate('orClickWithSize', {
-          size: bytes(state.user.maxSize)
+          size: bytes(state.user.maxSize),
         })}
       </div>
       <input
@@ -460,14 +452,14 @@ module.exports.empty = function(state, emit) {
         onfocus="${focus}"
         onblur="${blur}"
         onchange="${add}"
-        onclick="${e => e.stopPropagation()}"
+        onclick="${(e) => e.stopPropagation()}"
       />
       <label
         for="file-upload"
         role="button"
         class="btn rounded-lg flex items-center mt-4"
         title="${state.translate('addFilesButton', {
-          size: bytes(state.user.maxSize)
+          size: bytes(state.user.maxSize),
         })}"
       >
         ${state.translate('addFilesButton')}
@@ -496,7 +488,7 @@ module.exports.empty = function(state, emit) {
   }
 };
 
-module.exports.preview = function(state, emit) {
+module.exports.preview = function (state, emit) {
   const archive = state.fileInfo;
   if (archive.open === undefined) {
     archive.open = true;
@@ -516,22 +508,8 @@ module.exports.preview = function(state, emit) {
       <div class="border rounded py-3 px-4 dark:border-grey-70">
         ${archiveInfo(archive)} ${details}
       </div>
-      <div class="checkbox inline-block mt-6 mx-auto">
-        <input
-          id="trust-download"
-          type="checkbox"
-          autocomplete="off"
-          onchange="${toggleDownloadEnabled}"
-        />
-        <label for="trust-download">
-          ${state.translate('downloadTrustCheckbox', {
-            count: archive.manifest.files.length
-          })}
-        </label>
-      </div>
       <button
         id="download-btn"
-        disabled
         class="btn rounded-lg mt-4 w-full flex-shrink-0 focus:outline"
         title="${state.translate('downloadButtonLabel')}"
         onclick=${download}
@@ -541,13 +519,6 @@ module.exports.preview = function(state, emit) {
     </send-archive>
   `;
 
-  function toggleDownloadEnabled(event) {
-    event.stopPropagation();
-    const checked = event.target.checked;
-    const btn = document.getElementById('download-btn');
-    btn.disabled = !checked;
-  }
-
   function download(event) {
     event.preventDefault();
     event.target.disabled = true;
@@ -555,7 +526,7 @@ module.exports.preview = function(state, emit) {
   }
 };
 
-module.exports.downloading = function(state) {
+module.exports.downloading = function (state) {
   const archive = state.fileInfo;
   const progress = state.transfer.progressRatio;
   const progressPercent = percent(progress);
@@ -564,9 +535,7 @@ module.exports.downloading = function(state) {
       class="flex flex-col bg-white rounded shadow-light p-4 w-full max-w-sm md:w-128 dark:bg-grey-90"
     >
       ${archiveInfo(archive)}
-      <div class="link-blue text-sm font-medium mt-2">
-        ${progressPercent}
-      </div>
+      <div class="link-blue text-sm font-medium mt-2">${progressPercent}</div>
       <progress class="my-3" value="${progress}">${progressPercent}</progress>
     </send-archive>
   `;

@@ -1,12 +1,12 @@
 import FileSender from './fileSender';
 import FileReceiver from './fileReceiver';
 import { copyToClipboard, delay, openLinksInNewTab, percent } from './utils';
-import { bytes } from './utils';
+import { bytes, noSaveTypes } from './utils';
 import okDialog from './ui/okDialog';
 import copyDialog from './ui/copyDialog';
 import shareDialog from './ui/shareDialog';
 
-export default function(state, emitter) {
+export default function (state, emitter) {
   let lastRender = 0;
   let updateTitle = false;
 
@@ -33,7 +33,7 @@ export default function(state, emitter) {
     lastRender = Date.now();
   });
 
-  emitter.on('removeUpload', file => {
+  emitter.on('removeUpload', (file) => {
     state.archive.remove(file);
     if (state.archive.numFiles === 0) {
       state.archive.clear();
@@ -41,7 +41,7 @@ export default function(state, emitter) {
     render();
   });
 
-  emitter.on('delete', async ownedFile => {
+  emitter.on('delete', async (ownedFile) => {
     try {
       state.storage.remove(ownedFile.id);
       await ownedFile.del();
@@ -70,7 +70,7 @@ export default function(state, emitter) {
       state.modal = okDialog(
         state.translate(e.message, {
           size: bytes(maxSize),
-          count: state.LIMITS.MAX_FILES_PER_ARCHIVE
+          count: state.LIMITS.MAX_FILES_PER_ARCHIVE,
         })
       );
     }
@@ -81,7 +81,7 @@ export default function(state, emitter) {
     if (state.storage.files.length >= state.LIMITS.MAX_ARCHIVES_PER_USER) {
       state.modal = okDialog(
         state.translate('tooManyArchives', {
-          count: state.LIMITS.MAX_ARCHIVES_PER_USER
+          count: state.LIMITS.MAX_ARCHIVES_PER_USER,
         })
       );
       return render();
@@ -107,7 +107,7 @@ export default function(state, emitter) {
       if (archive.password) {
         emitter.emit('password', {
           password: archive.password,
-          file: ownedFile
+          file: ownedFile,
         });
       }
       state.modal = state.capabilities.share
@@ -182,7 +182,8 @@ export default function(state, emitter) {
     try {
       const dl = state.transfer.download({
         stream: state.capabilities.streamDownload,
-        storage: state.storage
+        storage: state.storage,
+        noSave: noSaveTypes.has(state.transfer.fileInfo.type),
       });
       render();
       await dl;

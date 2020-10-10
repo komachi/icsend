@@ -77,11 +77,6 @@ const conf = convict({
     default: 'mock',
     env: 'REDIS_HOST',
   },
-  redis_event_expire: {
-    format: Boolean,
-    default: false,
-    env: 'REDIS_EVENT_EXPIRE',
-  },
   redis_retry_time: {
     format: Number,
     default: 10000,
