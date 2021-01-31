@@ -14,7 +14,7 @@ function createFileInfo(state) {
     id: state.params.id,
     secretKey: state.params.key,
     nonce: downloadMetadata.nonce,
-    requiresPassword: downloadMetadata.pwd
+    requiresPassword: downloadMetadata.pwd,
   };
 }
 
@@ -71,17 +71,12 @@ function preview(state, emit) {
         class="w-full flex-half flex-half md:flex md:flex-col md:justify-center"
       >
         ${archiveTile.preview(state, emit)}
-        <a href="/report" class="link-blue mt-4 text-center block"
-          >${state.translate('reportFile', {
-            count: state.fileInfo.manifest.files.length
-          })}</a
-        >
       </div>
     </div>
   `;
 }
 
-module.exports = function(state, emit) {
+module.exports = function (state, emit) {
   let content = '';
   if (!state.fileInfo) {
     state.fileInfo = createFileInfo(state);

@@ -2,7 +2,7 @@ const html = require('choo/html');
 const assets = require('../../common/assets');
 const modal = require('./modal');
 
-module.exports = function(state, emit) {
+module.exports = function (state, emit) {
   return html`
     <main class="main">
       ${state.modal && modal(state, emit)}
@@ -16,11 +16,6 @@ module.exports = function(state, emit) {
         <p class="my-5">
           <a href="/" class="btn rounded-lg flex items-center" role="button"
             >${state.translate('okButton')}</a
-          >
-        </p>
-        <p class="">
-          <a href="/report" class="link-blue"
-            >${state.translate('reportFile')}</a
           >
         </p>
       </section>

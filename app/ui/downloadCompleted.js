@@ -9,11 +9,17 @@ module.exports = function (state) {
         id="download-complete"
         class="flex flex-col items-center justify-center h-full w-full bg-white p-2 dark:bg-grey-90"
       >
-        ${imageTypes.has(state.transfer.fileInfo.type) &&
-        html` <img src="${state.transfer.fileURI}" class="my-2 mx-2" /> `}
-        <p class="">
-          <a href="/report" class="link-blue"
-            >${state.translate('reportFile')}</a
+        <div class="my-2 mx-2 overflow-auto">
+          ${imageTypes.has(state.transfer.fileInfo.type) &&
+          html`<img src="${state.transfer.fileURI}" alt="Shared image" />`}
+        </div>
+        <p>
+          <a
+            href="${state.transfer.fileURI}"
+            target="_blank"
+            class="link-blue"
+            download="${state.transfer.fileInfo.name}"
+            >Download as a file</a
           >
         </p>
       </div>
@@ -32,9 +38,6 @@ module.exports = function (state) {
         <a href="/" class="btn rounded-lg flex items-center mt-4" role="button"
           >${state.translate('okButton')}</a
         >
-      </p>
-      <p class="">
-        <a href="/report" class="link-blue">${state.translate('reportFile')}</a>
       </p>
     </div>
   `;

@@ -69,7 +69,7 @@ const conf = convict({
   },
   max_archives_per_user: {
     format: Number,
-    default: 16,
+    default: 100,
     env: 'MAX_ARCHIVES_PER_USER',
   },
   redis_host: {
